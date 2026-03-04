@@ -27,7 +27,7 @@ const NAV_HTML = `
       <a href="index.html">Home</a>
       <a href="spares.html">Spares</a>
       <a href="services.html">Service</a>
-      <a href="manuals.html">Manuals</a>
+
       <a href="machines.html">Machines</a>
       <a href="register.html">Register</a>
       <a href="faq.html">FAQ</a>
@@ -70,15 +70,7 @@ const FOOTER_HTML = `
         <div class="footer-col">
           <h4>Resources &amp; Guides</h4>
           <ul>
-            <li><a href="manuals.html">Technical Manuals</a></li>
-            <li><a href="manual-lookup.html">Manual Lookup Tool</a></li>
             <li><a href="clutch-lookup.html">Clutch Plate Lookup</a></li>
-            <li><a href="guides/identify-your-series.html">Identify Your Series</a></li>
-            <li><a href="guides/identifying-your-machine.html">Machine Identification Guide</a></li>
-            <li><a href="guides/table-wont-rotate.html">Troubleshooting: Table Won't Rotate</a></li>
-            <li><a href="guides/clutch-slipping.html">Troubleshooting: Clutch Slipping</a></li>
-            <li><a href="guides/brake-not-holding.html">Troubleshooting: Brake Not Holding</a></li>
-            <li><a href="guides/saddle-backlash.html">Troubleshooting: Saddle Backlash</a></li>
             <li><a href="faq.html">Parts FAQ</a></li>
           </ul>
         </div>
