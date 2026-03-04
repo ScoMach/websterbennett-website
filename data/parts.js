@@ -54,40 +54,9 @@ const PARTS = {
       description: "Genuine brake linings, brake bands, and brake hardware for W&B rotary table and spindle braking systems. Held in USA inventory — contact us to confirm availability for your model.",
       compatible: ["All models"],
       partNumber: "",
-      featured: false,
+      featured: true,
       inStockUSA: true
     },
-    // ── ORDER FROM UK — Typically 2–4 weeks ──
-    {
-      id: "wb-ts-001",
-      name: "Main Spindle Taper Roller Bearing",
-      category: "Spindle & Bearing",
-      description: "Precision taper roller bearing for the main spindle assembly. Manufactured to original W&B specifications for exact fit and rated load capacity. Critical for maintaining spindle accuracy.",
-      compatible: ["36\"", "48\"", "60\"", "72\""],
-      partNumber: "",
-      featured: false,
-      inStockUSA: false
-    },
-    {
-      id: "wb-ts-002",
-      name: "Cross-Rail Elevation Gearbox",
-      category: "Gearbox & Drive",
-      description: "Gearbox assembly for cross-rail vertical positioning. Precision-ground gears matched to original specifications. Supplied as a complete unit ready for installation.",
-      compatible: ["All models"],
-      partNumber: "",
-      featured: false,
-      inStockUSA: false
-    },
-    {
-      id: "wb-ts-003",
-      name: "Way Wiper & Seal Kit",
-      category: "Seals & Wear Parts",
-      description: "Complete way wiper and seal kit for column and cross-rail slideways. Prevents contamination and maintains way surface lubrication. Specify machine model when ordering.",
-      compatible: ["All models"],
-      partNumber: "",
-      featured: false,
-      inStockUSA: false
-    }
   ],
 
   categories: [

@@ -53,7 +53,7 @@ const FOOTER_HTML = `
               <div class="footer-brand-sub">Scofield Machine Sales &amp; Service, Inc.</div>
             </div>
           </div>
-          <p class="footer-desc">The exclusive authorized source for genuine Webster &amp; Bennett spare parts in North and South America. Sourced directly from Webster &amp; Bennett UK since 1995.</p>
+          <p class="footer-desc">The exclusive authorized source for genuine Webster &amp; Bennett spare parts in the Americas. Sourced directly from Webster &amp; Bennett UK since 1993.</p>
           <div class="footer-phone">📞 +1-847-427-9360</div>
           <div class="footer-email">websterbennett@scofieldmachine.com</div>
         </div>
@@ -71,6 +71,7 @@ const FOOTER_HTML = `
           <h4>Resources &amp; Guides</h4>
           <ul>
             <li><a href="manuals.html">Technical Manuals</a></li>
+            <li><a href="manual-lookup.html">Manual Lookup Tool</a></li>
             <li><a href="clutch-lookup.html">Clutch Plate Lookup</a></li>
             <li><a href="guides/identify-your-series.html">Identify Your Series</a></li>
             <li><a href="guides/identifying-your-machine.html">Machine Identification Guide</a></li>
@@ -95,7 +96,7 @@ const FOOTER_HTML = `
   <div class="container">
     <div class="footer-bottom">
       <p>©2026 Webster &amp; Bennett USA | Operated by Scofield Machine Sales &amp; Service, Inc. | All rights reserved.</p>
-      <p>Exclusive authorized Webster &amp; Bennett parts distributor for North &amp; South America</p>
+      <p>Exclusive authorized Webster &amp; Bennett parts distributor for the Americas</p>
     </div>
   </div>
 </footer>`;

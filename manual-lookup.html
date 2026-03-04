@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webster & Bennett Manual Lookup | Find the Right Service Manual</title>
+  <meta name="description" content="Enter your Webster & Bennett serial number to find the correct service manual for your machine. Covers all W&B VTL series from Pre-DH through N/EV/R.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.websterbennett.com/manual-lookup">
+  <meta property="og:title" content="Webster & Bennett Manual Lookup Tool">
+  <meta property="og:description" content="Enter your W&B serial number to find the correct service manual — parts lists, assembly drawings, hydraulic diagrams, and electrical schematics.">
+  <meta property="og:image" content="https://www.websterbennett.com/assets/drawing_blueprint.jpg">
+  <meta property="og:site_name" content="Webster &amp; Bennett USA">
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Webster & Bennett Manual Lookup Tool">
+  <meta name="twitter:description" content="Find the correct service manual for your W&B machine by serial number.">
+  <meta name="twitter:image" content="https://www.websterbennett.com/assets/drawing_blueprint.jpg">
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://www.websterbennett.com/manual-lookup">
+  <style>
+    .lookup-container { max-width: 860px; margin: 0 auto; }
+
+    /* Form */
+    .lookup-form { background: var(--gray-lt); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; margin-bottom: 32px; }
+    .lookup-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end; }
+    .lookup-row .form-group input { padding: 13px 16px; font-size: 0.95rem; border: 1px solid var(--border); border-radius: var(--radius); width: 100%; font-family: inherit; }
+    .lookup-row .form-group input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(235,107,37,0.15); }
+    .lookup-row .btn { height: 48px; white-space: nowrap; }
+
+    /* Result */
+    .result-card { background: var(--white); border: 2px solid var(--orange); border-radius: var(--radius-lg); padding: 36px; display: none; }
+    .result-card.visible { display: block; }
+    .result-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .result-header .check { width: 36px; height: 36px; background: var(--success); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .result-header h3 { font-size: 1.15rem; margin: 0; }
+    .series-meta { display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .series-badge { font-size: 0.73rem; font-weight: 700; padding: 4px 12px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .series-badge.badge-range { background: var(--navy); color: var(--white); }
+    .series-badge.badge-era { background: var(--orange-pale); color: var(--orange); }
+
+    /* Manual rows */
+    .manuals-section h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 12px; }
+    .manual-row { display: grid; grid-template-columns: 90px 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; }
+    .manual-row.featured { border-color: var(--orange); }
+    .manual-ref-cell { background: var(--navy); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px 10px; text-align: center; }
+    .manual-row.featured .manual-ref-cell { background: var(--orange); }
+    .manual-ref-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.75; margin-bottom: 2px; }
+    .manual-ref-number { font-size: 0.95rem; font-weight: 800; font-family: monospace; }
+    .manual-body-cell { padding: 14px 18px; }
+    .manual-row-title { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .manual-row-coverage { font-size: 0.82rem; color: var(--gray-mid); line-height: 1.4; }
+    .manual-caveat { display: inline-block; font-size: 0.72rem; font-weight: 700; color: #c0392b; background: #fdecea; padding: 2px 8px; border-radius: 3px; margin-top: 4px; }
+    .manual-featured-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: var(--orange); color: var(--white); padding: 2px 8px; border-radius: 3px; margin-bottom: 4px; }
+
+    /* Notes */
+    .result-notes { margin-top: 20px; padding: 16px 20px; background: var(--gray-lt); border-radius: var(--radius); border: 1px solid var(--border); }
+    .result-notes p { font-size: 0.84rem; margin-bottom: 6px; line-height: 1.5; }
+    .result-notes p:last-child { margin-bottom: 0; }
+    .result-notes p::before { content: "ℹ  "; color: var(--orange); }
+
+    /* Boundary warning */
+    .boundary-warning { display: none; margin-bottom: 16px; padding: 14px 18px; background: #FFF8E1; border: 1px solid #FFD54F; border-radius: var(--radius); }
+    .boundary-warning.visible { display: block; }
+    .boundary-warning p { font-size: 0.84rem; color: #5D4037; margin: 0; }
+
+    /* No result */
+    .no-result { display: none; padding: 24px; background: #FFF3CD; border: 1px solid #FFEAA7; border-radius: var(--radius); text-align: center; }
+    .no-result.visible { display: block; }
+    .no-result p { color: #664D03; font-size: 0.92rem; }
+
+    /* How it works */
+    .how-it-works { margin-top: 48px; }
+    .serial-diagram { background: var(--gray-lt); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; margin: 20px 0; text-align: center; }
+    .serial-example { font-size: 2.2rem; font-weight: 800; font-family: monospace; color: var(--navy); letter-spacing: 0.12em; margin-bottom: 16px; }
+    .serial-labels { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .serial-label-item { text-align: center; }
+    .serial-label-item .label-part { font-size: 1.1rem; font-weight: 800; font-family: monospace; color: var(--orange); }
+    .serial-label-item .label-desc { font-size: 0.78rem; color: var(--gray-mid); margin-top: 4px; }
+    .series-range-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .series-range-table th { background: var(--navy); color: var(--white); padding: 10px 14px; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .series-range-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); font-size: 0.87rem; }
+    .series-range-table tr:last-child td { border-bottom: none; }
+    .series-range-table tr:hover { background: var(--orange-pale); }
+
+    @media (max-width: 600px) {
+      .lookup-row { grid-template-columns: 1fr; }
+      .manual-row { grid-template-columns: 70px 1fr; }
+      .series-meta { flex-wrap: wrap; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <div class="page-header-bg" style="background-image:url('assets/drawing_blueprint.jpg'); opacity:0.25;"></div>
+  <div class="container">
+    <span class="eyebrow">Documentation Tool</span>
+    <h1>Manual Lookup</h1>
+    <p>Enter your Webster &amp; Bennett serial number to find the correct service manual for your machine.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="lookup-container">
+
+      <!-- LOOKUP FORM -->
+      <div class="lookup-form">
+        <div class="lookup-row">
+          <div class="form-group">
+            <label for="serialInput">Serial Number</label>
+            <input type="text" id="serialInput" placeholder="e.g. 5834-2 or 6712-1" maxlength="20"
+              onkeydown="if(event.key==='Enter') lookupManual()">
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="lookupManual()">Find My Manual</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--gray-mid);margin-top:12px;">
+          Enter the number from your machine's serial plate — just the machine number is fine (e.g. 5834). It's stamped on the end face of the cross slide.
+          Don't know your serial? <a href="guides/identify-your-series.html">Read our identification guide</a>.
+        </p>
+      </div>
+
+      <!-- BOUNDARY WARNING -->
+      <div id="boundaryWarning" class="boundary-warning">
+        <p id="boundaryWarningText"></p>
+      </div>
+
+      <!-- RESULT -->
+      <div id="resultCard" class="result-card">
+
+        <div class="result-header">
+          <div class="check">✓</div>
+          <div>
+            <h3 id="resultTitle"></h3>
+          </div>
+        </div>
+
+        <div class="series-meta">
+          <span class="series-badge badge-range" id="resultRange"></span>
+          <span class="series-badge badge-era" id="resultEra"></span>
+        </div>
+
+        <div class="manuals-section" id="manualsSection"></div>
+
+        <div class="result-notes" id="resultNotes"></div>
+
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;" id="resultCTA"></div>
+      </div>
+
+      <!-- NO RESULT -->
+      <div id="noResult" class="no-result">
+        <p><strong>We couldn't parse that serial number.</strong></p>
+        <p>Try entering just the machine number — the digits before the dash (e.g. <strong>5834</strong>). If you're still having trouble, call us at <a href="tel:8474279360">+1-847-427-9360</a>.</p>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div class="how-it-works">
+        <h3>How to Read Your Serial Number</h3>
+        <p>The serial number on a W&amp;B machine has two parts separated by a dash or slash.</p>
+
+        <div class="serial-diagram">
+          <div class="serial-example">5834 <span style="color:var(--orange)">-</span> 2</div>
+          <div class="serial-labels">
+            <div class="serial-label-item">
+              <div class="label-part">5834</div>
+              <div class="label-desc">Machine number<br>Determines the series</div>
+            </div>
+            <div class="serial-label-item">
+              <div class="label-part">- 2</div>
+              <div class="label-desc">Build suffix<br>Identifies configuration batch</div>
+            </div>
+          </div>
+        </div>
+
+        <p>The machine number (left of the dash) places your machine in a series. Use that series to find the right manual. The suffix is important when ordering parts — always include it.</p>
+
+        <p><strong>Where to find it:</strong> The serial number is stamped or cast on the <strong>end face of the cross slide</strong>. A secondary location is the headstock nameplate, though this can be missing or re-stamped after a rebuild.</p>
+
+        <h3 style="margin-top:32px;">Series Reference</h3>
+        <table class="series-range-table">
+          <thead>
+            <tr>
+              <th>Machine # Range</th>
+              <th>Series</th>
+              <th>Era</th>
+              <th>Key Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Up to ~5021</td><td><strong>Pre-DH / D / DCM</strong></td><td>Pre-1960s</td><td>Older design; significant variation</td></tr>
+            <tr><td>5022 – 5232</td><td><strong>Early DH</strong></td><td>~Early 1960s</td><td>Thin Taylor clutch plates; old-type spring</td></tr>
+            <tr><td>5233 – 5441</td><td><strong>Series II DH</strong></td><td>~Mid 1960s</td><td>Splined/thicker clutch plates</td></tr>
+            <tr><td>5442 – 6561</td><td><strong>M / EM</strong></td><td>~Late 1960s–70s</td><td>Spur-drive clutch; new-type spring</td></tr>
+            <tr><td>6562 and above</td><td><strong>N / EV / R</strong></td><td>~1970s–1990s</td><td>Final production; always No.6 clutch</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--gray-mid);">
+          At serial numbers near a series boundary (±5), physical inspection or confirmation from W&amp;B UK may be needed to determine the exact series.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Need clutch plate part numbers?</h2>
+    <p>Use our interactive clutch plate lookup to find the correct steel discs, Ferodo discs, and spring assemblies for your series and table size.</p>
+    <div class="cta-actions">
+      <a href="clutch-lookup.html" class="btn btn-white btn-lg">Clutch Plate Lookup</a>
+      <a href="contact.html" class="btn btn-outline-white btn-lg">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  try { renderNav('manual-lookup.html'); } catch(e) {}
+  try { renderFooter(); } catch(e) {}
+
+  /* ── Manual Data by Series ── */
+  const MANUAL_DATA = {
+    pre_dh: {
+      seriesName: 'Pre-DH / D / DCM Series',
+      range: 'S/N up to ~5021',
+      era: 'Pre-1960s',
+      manuals: [
+        {
+          ref: '100/1 DCM',
+          title: 'Pre-DH & DCM Series — Parts Manual',
+          coverage: 'Parts lists and assembly references for DCM and pre-DH series machines.',
+          featured: false
+        }
+      ],
+      notes: [
+        'Pre-DH machines vary significantly between builds. Always provide the full serial number including the suffix when contacting us.',
+        'If your nameplate is marked "D" or "DCM", Manual Ref 100/1 DCM is the standard reference. Other variants may apply.',
+        'Contact us before ordering — we may have more specific documentation for your exact build configuration.'
+      ],
+      ctaLabel: 'Request Pre-DH Documentation',
+      ctaQuery: 'Pre-DH%20%2F%20DCM%20Series%20manual'
+    },
+    early_dh: {
+      seriesName: 'Early DH Series',
+      range: 'S/N 5022–5232',
+      era: 'Early 1960s',
+      manuals: [],
+      notes: [
+        'Early DH machines use thin Taylor clutch plates — not interchangeable with later series.',
+        'DH series documentation is handled directly by our team. Contact us with your full serial number including suffix and we\'ll confirm availability and the correct reference for your build.'
+      ],
+      ctaLabel: 'Request Early DH Documentation',
+      ctaQuery: 'Early%20DH%20series%20manual'
+    },
+    series2_dh: {
+      seriesName: 'Series II DH',
+      range: 'S/N 5233–5441',
+      era: 'Mid 1960s',
+      manuals: [],
+      notes: [
+        'Series II DH introduced splined / thicker clutch plates compared to Early DH — not interchangeable.',
+        'DH series documentation is handled directly by our team. Contact us with your full serial number including suffix and we\'ll confirm the correct documentation for your machine.'
+      ],
+      ctaLabel: 'Request Series II DH Documentation',
+      ctaQuery: 'Series%20II%20DH%20manual'
+    },
+    m_em: {
+      seriesName: 'M / EM Series',
+      range: 'S/N 5442–6561',
+      era: 'Late 1960s–1970s',
+      manuals: [], // computed dynamically by getMEmData(num)
+      notes: [],   // computed dynamically by getMEmData(num)
+      ctaLabel: 'Request M/EM Series Manuals',
+      ctaQuery: 'M%20%2F%20EM%20series%20manual'
+    },
+    n_ev_r: {
+      seriesName: 'N / EV / R Series',
+      range: 'S/N 6562 and above',
+      era: '1970s–1990s',
+      manuals: [
+        {
+          ref: '101/EV',
+          title: 'EV Series — Service Manual',
+          coverage: 'Electronic variable-speed machines in the later production series.',
+          featured: false
+        },
+        {
+          ref: '101/R',
+          title: 'R Series Manual — 72" Table',
+          coverage: 'R series machines with 72" table configuration.',
+          featured: false
+        },
+        {
+          ref: '100/R 36',
+          title: 'R Series Manual — 36" Table',
+          coverage: 'R series machines with 36" table configuration.',
+          featured: false
+        },
+        {
+          ref: '100/EV',
+          title: 'EV Series — Parts Manual',
+          coverage: 'Parts reference for EV series machines.',
+          featured: false
+        }
+      ],
+      notes: [
+        'The correct manual depends on your specific variant (N, EV, or R) and table size.',
+        'Check your machine nameplate or control panel for the variant designation — it will read "EV", "R", or "N".',
+        'N/EV/R series always uses the No.6 spur clutch regardless of table size.'
+      ],
+      ctaLabel: 'Contact Us to Confirm Your Manual',
+      ctaQuery: 'N%20%2F%20EV%20%2F%20R%20series%20manual'
+    }
+  };
+
+  /* ── Series boundaries for warnings ── */
+  const BOUNDARIES = [
+    { at: 5022, range: [5017, 5027], msg: '⚠ S/N near a series boundary (Pre-DH / Early DH). Physical inspection or confirmation from W&B UK may be needed to determine your exact series.' },
+    { at: 5233, range: [5228, 5238], msg: '⚠ S/N near a series boundary (Early DH / Series II DH). Physical inspection or confirmation from W&B UK may be needed to determine your exact series.' },
+    { at: 5442, range: [5437, 5447], msg: '⚠ S/N near a series boundary (Series II DH / M series). Physical inspection or confirmation from W&B UK may be needed to determine your exact series.' },
+    { at: 6562, range: [6557, 6567], msg: '⚠ S/N near a series boundary (M/EM / N-EV-R). Physical inspection or confirmation from W&B UK may be needed to determine your exact series.' }
+  ];
+
+  /* ── M/EM sub-range: pick the correct primary manual by machine number ── */
+  function getMEmData(num) {
+    const m101_10 = {
+      ref: '101/10',
+      title: 'M / EM Series — Complete Service Manual',
+      coverage: 'M series pages 1–117 · EM series pages 118–148 · Covers 36", 48", and 60" table sizes.',
+      caveat: 'Does NOT cover 72" table configurations.',
+      featured: false
+    };
+    const m101_8 = {
+      ref: '101/8 PP',
+      title: 'M Series Parts List — from S/N 5484',
+      coverage: 'Dedicated parts reference for the 5484–5758 build range.',
+      featured: false
+    };
+    const m101_9 = {
+      ref: '101/9 PP',
+      title: 'M Series Parts List — from S/N 5759',
+      coverage: 'Dedicated parts reference for machines from S/N 5759/1.',
+      featured: false
+    };
+
+    if (num <= 5483) {
+      // Early M range — 101/10 is the only reference before 5484
+      m101_10.featured = true;
+      return {
+        manuals: [m101_10],
+        notes: [
+          'Manual Ref 101/10 is the primary reference for this build range (M and EM series).',
+          'M vs. EM: M = manual speed change, EM = electronic variable speed. EM section is pages 118–148.',
+          'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
+        ]
+      };
+    } else if (num <= 5758) {
+      // 5484–5758: 101/8 PP is the key parts reference for this build range
+      m101_8.featured = true;
+      return {
+        manuals: [m101_8, m101_10],
+        notes: [
+          'Manual Ref 101/8 PP is the key parts reference for the 5484–5758 build range.',
+          '101/10 is the comprehensive service manual — also covers the EM variant (pages 118–148).',
+          'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
+        ]
+      };
+    } else {
+      // 5759–6561: 101/9 PP is the key parts reference
+      m101_9.featured = true;
+      return {
+        manuals: [m101_9, m101_10],
+        notes: [
+          'Manual Ref 101/9 PP is the key parts reference for machines from S/N 5759.',
+          '101/10 is the comprehensive service manual — also covers the EM variant (pages 118–148).',
+          'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
+        ]
+      };
+    }
+  }
+
+  function getSeriesKey(num) {
+    if (num < 5022) return 'pre_dh';
+    if (num <= 5232) return 'early_dh';
+    if (num <= 5441) return 'series2_dh';
+    if (num <= 6561) return 'm_em';
+    return 'n_ev_r';
+  }
+
+  function lookupManual() {
+    const raw = document.getElementById('serialInput').value.trim();
+    const resultCard = document.getElementById('resultCard');
+    const noResult = document.getElementById('noResult');
+    const boundaryWarning = document.getElementById('boundaryWarning');
+
+    // Reset
+    resultCard.classList.remove('visible');
+    noResult.classList.remove('visible');
+    boundaryWarning.classList.remove('visible');
+
+    // Parse: take leading digits
+    const match = raw.match(/^(\d+)/);
+    if (!match || !raw) {
+      noResult.classList.add('visible');
+      noResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    const num = parseInt(match[1], 10);
+
+    // Check boundaries
+    for (const b of BOUNDARIES) {
+      if (num >= b.range[0] && num <= b.range[1]) {
+        document.getElementById('boundaryWarningText').textContent = b.msg;
+        boundaryWarning.classList.add('visible');
+        break;
+      }
+    }
+
+    const key = getSeriesKey(num);
+    // For M/EM: compute sub-range specific manuals + notes (clone to avoid mutating shared data)
+    const data = key === 'm_em'
+      ? Object.assign({}, MANUAL_DATA[key], getMEmData(num))
+      : MANUAL_DATA[key];
+
+    // Populate header
+    document.getElementById('resultTitle').textContent = 'Series Identified: ' + data.seriesName;
+    document.getElementById('resultRange').textContent = data.range;
+    document.getElementById('resultEra').textContent = data.era;
+
+    // Manuals
+    const manualsSection = document.getElementById('manualsSection');
+    if (data.manuals.length > 0) {
+      let html = '<h4>Recommended Manual' + (data.manuals.length > 1 ? 's' : '') + '</h4>';
+      data.manuals.forEach(m => {
+        html += `
+          <div class="manual-row${m.featured ? ' featured' : ''}">
+            <div class="manual-ref-cell">
+              <div class="manual-ref-label">WB Ref</div>
+              <div class="manual-ref-number">${m.ref}</div>
+            </div>
+            <div class="manual-body-cell">
+              ${m.featured ? '<div class="manual-featured-tag">Primary Reference</div>' : ''}
+              <div class="manual-row-title">${m.title}</div>
+              <div class="manual-row-coverage">${m.coverage}</div>
+              ${m.caveat ? `<div class="manual-caveat">⚠ ${m.caveat}</div>` : ''}
+            </div>
+          </div>`;
+      });
+      manualsSection.innerHTML = html;
+    } else {
+      manualsSection.innerHTML = '<p style="font-size:0.9rem;color:var(--gray-mid);">Documentation for this series is handled directly — see notes below.</p>';
+    }
+
+    // Notes
+    const notesEl = document.getElementById('resultNotes');
+    notesEl.innerHTML = data.notes.map(n => `<p>${n}</p>`).join('');
+
+    // CTA
+    document.getElementById('resultCTA').innerHTML = `
+      <a href="contact.html?part=${data.ctaQuery}" class="btn btn-primary btn-lg">${data.ctaLabel}</a>
+      <a href="tel:8474279360" class="btn btn-outline btn-lg">📞 Call Us</a>`;
+
+    resultCard.classList.add('visible');
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

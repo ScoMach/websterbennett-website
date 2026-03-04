@@ -65,18 +65,6 @@
   </div>
 </section>
 
-<!-- ── CATEGORIES ── -->
-<section class="section bg-gray" id="categories">
-  <div class="container">
-    <div class="section-header">
-      <span class="eyebrow">Browse by Category</span>
-      <h2>Parts by Category</h2>
-      <div class="orange-rule"></div>
-      <p style="margin-top:14px;">We source parts across all major W&amp;B machine systems. Contact us with your model and we'll identify the exact part you need.</p>
-    </div>
-    <div class="category-grid" id="categoryGrid"></div>
-  </div>
-</section>
 
 <!-- ── QUOTE FORM ── -->
 <section class="section">
@@ -178,20 +166,13 @@
 
   const grid = document.getElementById('topSellersGrid');
   PARTS.topSellers.forEach(p => {
-    const stockBadge = p.inStockUSA
-      ? `<span style="display:inline-flex;align-items:center;gap:5px;background:#e8f5e9;color:#2e7d32;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px;">🇺🇸 In Stock USA</span>`
-      : `<span style="display:inline-flex;align-items:center;gap:5px;background:#f5f5f5;color:#666;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px;">Ships from UK</span>`;
     grid.innerHTML += `
       <div class="part-card${p.featured ? ' featured' : ''}">
         ${p.featured ? '<span class="part-badge">Top Seller</span>' : ''}
-        ${stockBadge}
-        <div class="part-category">${p.category}</div>
+        ${p.inStockUSA ? `<span style="display:inline-flex;align-items:center;gap:5px;background:#e8f5e9;color:#2e7d32;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px;">🇺🇸 In Stock</span>` : ''}
         <h3>${p.name}</h3>
         <p>${p.description}</p>
-        <div class="part-meta">
-          <div class="part-compatible"><strong>Compatible with:</strong> ${p.compatible.join(', ')} models</div>
-        </div>
-        <a href="spares.html?part=${encodeURIComponent(p.name)}" class="btn btn-primary">Request a Quote</a>
+        <a href="spares.html?part=${encodeURIComponent(p.name)}" class="btn btn-primary" style="margin-top:auto;">Request a Quote</a>
       </div>`;
   });
 
