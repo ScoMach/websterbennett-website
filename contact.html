@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Webster & Bennett USA | Parts Quotes & Service</title>
+  <meta name="description" content="Contact Webster & Bennett USA for genuine spare parts quotes and service coordination. Same business day response. Call 847-427-9360.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.websterbennett.com/contact">
+  <meta property="og:title" content="Contact Webster & Bennett USA | Parts Quotes & Service">
+  <meta property="og:description" content="Contact us for genuine spare parts quotes and service coordination. Same business day response. Call 847-427-9360.">
+  <meta property="og:image" content="https://www.websterbennett.com/assets/logo.png">
+  <meta property="og:site_name" content="Webster &amp; Bennett USA">
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Webster & Bennett USA | Parts Quotes & Service">
+  <meta name="twitter:description" content="Contact us for genuine spare parts quotes and service coordination. Same business day response. Call 847-427-9360.">
+  <meta name="twitter:image" content="https://www.websterbennett.com/assets/logo.png">
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://www.websterbennett.com/contact">
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>Contact Us</h1>
+    <p>Same-business-day response on all parts inquiries and service requests.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-card" style="margin-bottom:20px;">
+          <h3 style="margin-bottom:22px;">Contact Information</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value"><a href="tel:8474279360" style="color:var(--navy);">+1-847-427-9360</a></div>
+              <div class="contact-sub">Best for urgent or machine-down situations</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:websterbennett@scofieldmachine.com" style="color:var(--navy);font-size:0.82rem;">websterbennett@scofieldmachine.com</a></div>
+              <div class="contact-sub">Same business day response</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">⏰</div>
+            <div>
+              <div class="contact-label">Response Time</div>
+              <div class="contact-value">Same Business Day</div>
+              <div class="contact-sub">Monday – Friday</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌎</div>
+            <div>
+              <div class="contact-label">Coverage Area</div>
+              <div class="contact-value">North &amp; South America</div>
+              <div class="contact-sub">USA, Canada, Mexico &amp; South America</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card" style="background:var(--navy);border-color:var(--navy);">
+          <h4 style="color:var(--white);margin-bottom:10px;">Have your machine info ready</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.75);">For the fastest response, have your machine's <strong style="color:white;">table size, model, and serial number</strong> handy. The serial number plate is on the <strong style="color:white;">left-hand side of the cross rail</strong>, recessed above the lower way surface.</p>
+        </div>
+      </div>
+      <div class="form-section">
+        <h3 style="margin-bottom:6px;">Send Us a Message</h3>
+        <p style="margin-bottom:24px;">Parts inquiry, service request, or general question — we'll get back to you same business day.</p>
+        <div id="contactSuccess" class="alert alert-success">✓ Message sent! We'll respond same business day.</div>
+        <form id="contactForm" action="https://formspree.io/f/mjgenrew" method="POST">
+          <input type="hidden" name="_subject" value="Contact Form — Webster Bennett USA">
+          <div class="form-grid">
+            <div class="form-group"><label>Name *</label><input type="text" name="name" required placeholder="Your name"></div>
+            <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="Phone number"></div>
+            <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="Email address"></div>
+            <div class="form-group full">
+              <label>Subject</label>
+              <select name="subject">
+                <option value="parts">Parts inquiry</option>
+                <option value="service">Service coordination request</option>
+                <option value="manual">Manual / documentation</option>
+                <option value="machine">Machine for sale</option>
+                <option value="other">General question</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Message *</label><textarea name="message" required placeholder="Describe what you need — include machine model, table size, and serial number if relevant..."></textarea></div>
+          </div>
+          <div class="form-submit" style="margin-top:20px;">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  renderNav('contact.html');
+  renderFooter();
+  initForm('contactForm', 'contactSuccess');
+</script>
+</body>
+</html>

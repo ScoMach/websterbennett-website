@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webster & Bennett Spare Parts | Genuine OEM Parts Catalog</title>
+  <meta name="description" content="Browse genuine Webster & Bennett OEM spare parts. Bearings, hydraulics, gears, electrical and more. Request a quote same business day.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.websterbennett.com/spares">
+  <meta property="og:title" content="Webster & Bennett Spare Parts Catalog | OEM Parts">
+  <meta property="og:description" content="Browse genuine Webster & Bennett OEM spare parts. Bearings, hydraulics, gears, electrical and more. Same business day quotes.">
+  <meta property="og:image" content="https://www.websterbennett.com/assets/parts_closeup.jpg">
+  <meta property="og:site_name" content="Webster &amp; Bennett USA">
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Webster & Bennett Spare Parts Catalog | OEM Parts">
+  <meta name="twitter:description" content="Browse genuine Webster & Bennett OEM spare parts. Bearings, hydraulics, gears, electrical and more. Same business day quotes.">
+  <meta name="twitter:image" content="https://www.websterbennett.com/assets/parts_closeup.jpg">
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://www.websterbennett.com/spares">
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <div class="page-header-bg" style="background-image:url('assets/parts_closeup.jpg');"></div>
+  <div class="container">
+    <span class="eyebrow">Parts Catalog</span>
+    <h1>Webster &amp; Bennett Spare Parts</h1>
+    <p>Genuine OEM parts sourced directly from W&amp;B UK. Browse top sellers and categories, or contact us to source any part in the W&amp;B catalog.</p>
+  </div>
+</div>
+
+<!-- ── USA STOCK CALLOUT ── -->
+<section class="section-sm" style="background:var(--navy);color:#fff;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div style="background:var(--orange);border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🇺🇸</div>
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:var(--orange);margin-bottom:4px;">USA Stock — Ships Immediately</div>
+        <p style="margin:0;font-size:1.05rem;font-weight:600;color:#fff;">Clutch plates · Saddle nuts · Jaw screws · Shear pins · Brake parts</p>
+        <p style="margin:4px 0 0;font-size:0.88rem;color:rgba(255,255,255,0.7);">Common consumables held in Illinois — no international shipping wait.</p>
+      </div>
+      <a href="#top-sellers" class="btn btn-primary" style="white-space:nowrap;flex-shrink:0;">View In-Stock Parts</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOP SELLERS ── -->
+<section class="section" id="top-sellers">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Most Ordered</span>
+      <h2>Top-Selling Parts</h2>
+      <div class="orange-rule"></div>
+      <p style="margin-top:14px;">Parts our customers order most. Click "Request a Quote" on any part — we respond same business day.</p>
+    </div>
+    <div class="parts-grid" id="topSellersGrid"></div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<section class="section bg-gray" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Browse by Category</span>
+      <h2>Parts by Category</h2>
+      <div class="orange-rule"></div>
+      <p style="margin-top:14px;">We source parts across all major W&amp;B machine systems. Contact us with your model and we'll identify the exact part you need.</p>
+    </div>
+    <div class="category-grid" id="categoryGrid"></div>
+  </div>
+</section>
+
+<!-- ── QUOTE FORM ── -->
+<section class="section">
+  <div class="container">
+    <div style="max-width:780px;margin:0 auto;">
+      <div class="section-header">
+        <span class="eyebrow">Get a Quote</span>
+        <h2>Request a Part Quote</h2>
+        <div class="orange-rule"></div>
+        <p style="margin-top:14px;">Tell us your machine and what you need — we respond same business day.</p>
+      </div>
+      <div class="form-section">
+        <div id="quoteSuccess" class="alert alert-success">✓ Quote request sent! We'll respond same business day.</div>
+        <form id="quoteForm" action="https://formspree.io/f/mjgenrew" method="POST">
+          <input type="hidden" name="_subject" value="Parts Quote Request — Webster Bennett USA">
+          <div class="form-grid">
+            <div class="form-group"><label>Name *</label><input type="text" name="name" required placeholder="Your name"></div>
+            <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="Phone number"></div>
+            <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="Email address"></div>
+            <div class="form-group"><label>Machine Model</label><input type="text" name="model" id="partModelField" placeholder='e.g. "EM 60" or "DH 48"'></div>
+            <div class="form-group">
+              <label>Serial Number
+                <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-mid);font-size:0.72rem;margin-left:6px;">
+                  <a href="#serial-help" style="color:var(--orange);text-decoration:underline;">Where is this?</a>
+                </span>
+              </label>
+              <input type="text" name="serial" placeholder="e.g. 12345">
+            </div>
+            <div class="form-group full"><label>Part Name / Number</label><input type="text" name="partName" id="partNameField" placeholder="Part name or number if known"></div>
+            <div class="form-group full"><label>Part Description *</label><textarea name="description" required placeholder="Describe the part — what it does, where it's located, what's wrong..."></textarea></div>
+            <div class="form-group"><label>Quantity</label><input type="number" name="quantity" placeholder="1" min="1"></div>
+            <div class="form-group"><label>Urgency</label>
+              <select name="urgency">
+                <option value="">Select urgency</option>
+                <option value="machine-down">Machine Down — ASAP</option>
+                <option value="planned">Planned Maintenance</option>
+                <option value="stock">Stocking / Future Use</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Additional Notes</label><textarea name="notes" placeholder="Any other details that would help..."></textarea></div>
+          </div>
+          <div class="form-submit" style="margin-top:20px;">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Send Quote Request</button>
+          </div>
+          <p class="form-note">We respond same business day, Monday–Friday.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERIAL NUMBER HELP ── -->
+<section class="section-sm bg-gray" id="serial-help">
+  <div class="container">
+    <div style="max-width:780px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;">
+        <div>
+          <span style="display:inline-block;font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:var(--orange);margin-bottom:10px;">Machine Identification</span>
+          <h2 style="margin-bottom:14px;">How to Find Your Serial Number</h2>
+          <div style="width:48px;height:3px;background:var(--orange);border-radius:2px;margin-bottom:18px;"></div>
+          <p style="margin-bottom:14px;">The serial number plate is located on the <strong style="color:var(--navy);">left-hand side of the cross rail</strong>, recessed above the lower way surface.</p>
+          <p style="margin-bottom:18px;">It's a small metal tag stamped or engraved with the machine serial number. Look along the vertical face of the cross rail casting, just above where the rail sits on the column ways.</p>
+          <div style="background:var(--orange-pale);border:1px solid rgba(232,98,10,0.2);border-radius:var(--radius);padding:14px 16px;font-size:0.84rem;">
+            <strong style="color:var(--navy);">Tip:</strong> Also note the table diameter (stamped on the table face or listed on a second plate) — this helps us identify the exact parts for your configuration.
+          </div>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);">
+          <img src="assets/Webster Bennett Serial number copy.jpeg" alt="Webster &amp; Bennett serial number location — left hand side of cross rail, recessed above lower way surface" style="width:100%;display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <div class="container">
+    <h2>Need a part that's not listed?</h2>
+    <p>We source the complete W&amp;B catalog — including discontinued and hard-to-find parts. Call us directly for the fastest response.</p>
+    <div class="cta-actions">
+      <a href="tel:8474279360" class="btn btn-primary btn-lg">📞 +1-847-427-9360</a>
+      <a href="contact.html" class="btn btn-outline-white btn-lg">Send a Message</a>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="data/parts.js"></script>
+<script>
+  renderNav('spares.html');
+  renderFooter();
+  initForm('quoteForm', 'quoteSuccess');
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('part')) document.getElementById('partNameField').value = params.get('part');
+  if (params.get('model')) document.getElementById('partModelField').value = params.get('model');
+
+  const grid = document.getElementById('topSellersGrid');
+  PARTS.topSellers.forEach(p => {
+    const stockBadge = p.inStockUSA
+      ? `<span style="display:inline-flex;align-items:center;gap:5px;background:#e8f5e9;color:#2e7d32;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px;">🇺🇸 In Stock USA</span>`
+      : `<span style="display:inline-flex;align-items:center;gap:5px;background:#f5f5f5;color:#666;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:20px;margin-bottom:10px;">Ships from UK</span>`;
+    grid.innerHTML += `
+      <div class="part-card${p.featured ? ' featured' : ''}">
+        ${p.featured ? '<span class="part-badge">Top Seller</span>' : ''}
+        ${stockBadge}
+        <div class="part-category">${p.category}</div>
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="part-meta">
+          <div class="part-compatible"><strong>Compatible with:</strong> ${p.compatible.join(', ')} models</div>
+        </div>
+        <a href="spares.html?part=${encodeURIComponent(p.name)}" class="btn btn-primary">Request a Quote</a>
+      </div>`;
+  });
+
+  const catGrid = document.getElementById('categoryGrid');
+  PARTS.categories.forEach(c => {
+    catGrid.innerHTML += `
+      <div class="category-card">
+        <div class="category-icon">${c.icon}</div>
+        <h4>${c.name}</h4>
+        <p>${c.desc}</p>
+      </div>`;
+  });
+</script>
+</body>
+</html>

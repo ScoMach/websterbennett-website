@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webster & Bennett Clutch Plate Lookup | Find the Right Parts</title>
+  <meta name="description" content="Look up the correct clutch plate part numbers for your Webster & Bennett VTL. Select your series and table size to get steel discs, Ferodo discs, and springs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.websterbennett.com/clutch-lookup">
+  <meta property="og:title" content="Webster & Bennett Clutch Plate Lookup Tool">
+  <meta property="og:description" content="Select your W&B series and table size to find the correct clutch plate part numbers — steel discs, Ferodo discs, springs, and plungers.">
+  <meta property="og:image" content="https://www.websterbennett.com/assets/parts_closeup.jpg">
+  <meta property="og:site_name" content="Webster &amp; Bennett USA">
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Webster & Bennett Clutch Plate Lookup Tool">
+  <meta name="twitter:description" content="Find the correct clutch parts for your W&B machine by series and table size.">
+  <meta name="twitter:image" content="https://www.websterbennett.com/assets/parts_closeup.jpg">
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://www.websterbennett.com/clutch-lookup">
+  <style>
+    .lookup-container { max-width: 860px; margin: 0 auto; }
+    .lookup-form { background: var(--gray-lt); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; margin-bottom: 32px; }
+    .lookup-selects { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items: end; }
+    .lookup-selects .form-group select { padding: 13px 16px; font-size: 0.95rem; }
+    .lookup-selects .btn { height: 48px; }
+    .result-card { background: var(--white); border: 2px solid var(--orange); border-radius: var(--radius-lg); padding: 36px; display: none; }
+    .result-card.visible { display: block; }
+    .result-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .result-header .check { width: 36px; height: 36px; background: var(--success); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .result-header h3 { font-size: 1.1rem; margin: 0; }
+    .result-header .series-label { font-size: 0.78rem; color: var(--gray-mid); }
+    .parts-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .parts-table th { background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .parts-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .parts-table tr:hover { background: var(--orange-pale); }
+    .part-number { font-weight: 800; color: var(--navy); font-family: monospace; font-size: 0.95rem; }
+    .clutch-type { display: inline-block; background: var(--orange-pale); color: var(--orange); font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 3px; text-transform: uppercase; }
+    .result-notes { margin-top: 20px; padding: 16px 20px; background: var(--gray-lt); border-radius: var(--radius); border: 1px solid var(--border); }
+    .result-notes p { font-size: 0.84rem; margin-bottom: 8px; }
+    .result-notes p:last-child { margin-bottom: 0; }
+    .no-result { display: none; padding: 24px; background: #FFF3CD; border: 1px solid #FFEAA7; border-radius: var(--radius); text-align: center; }
+    .no-result.visible { display: block; }
+    .no-result p { color: #664D03; font-size: 0.92rem; }
+    .how-it-works { margin-top: 48px; }
+    .how-it-works h3 { margin-bottom: 16px; }
+    .how-it-works p { font-size: 0.88rem; margin-bottom: 12px; }
+    @media (max-width: 700px) { .lookup-selects { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow">Parts Lookup Tool</span>
+    <h1>Clutch Plate Lookup</h1>
+    <p>Select your series and table size to find the correct clutch plate part numbers for your Webster &amp; Bennett machine.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="lookup-container">
+
+      <!-- LOOKUP FORM -->
+      <div class="lookup-form">
+        <div class="lookup-selects">
+          <div class="form-group">
+            <label for="seriesSelect">Machine Series</label>
+            <select id="seriesSelect">
+              <option value="">— Select series —</option>
+              <option value="early_dh">Early DH (S/N 5022–5232)</option>
+              <option value="series2_dh">Series II DH (S/N 5233–5441)</option>
+              <option value="m_em">M / EM (S/N 5442–6561)</option>
+              <option value="n_ev_r">N / EV / R (S/N 6562+)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tableSelect">Table Size</label>
+            <select id="tableSelect">
+              <option value="">— Select table size —</option>
+              <option value="36">36"</option>
+              <option value="48">48" Standard</option>
+              <option value="48shs">48" S.H.S. (Special High Speed)</option>
+              <option value="48high">48" High</option>
+              <option value="60">60"</option>
+              <option value="72">72"</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="lookupClutch()">Look Up</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--gray-mid);margin-top:12px;">Don't know your series? <a href="guides/identify-your-series.html">Use our series identification guide</a>.</p>
+      </div>
+
+      <!-- RESULT -->
+      <div id="resultCard" class="result-card">
+        <div class="result-header">
+          <div class="check">✓</div>
+          <div>
+            <h3 id="resultTitle">Clutch Parts Identified</h3>
+            <div class="series-label" id="resultSubtitle"></div>
+          </div>
+        </div>
+
+        <table class="parts-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Part Number</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody">
+          </tbody>
+        </table>
+
+        <div class="result-notes">
+          <p><strong>Each clutch set requires 6 pairs of springs and plungers.</strong></p>
+          <p id="resultNote"></p>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="contact.html" class="btn btn-primary btn-lg">Request a Quote for These Parts</a>
+          <a href="tel:8474279360" class="btn btn-outline btn-lg">📞 Call Us</a>
+        </div>
+      </div>
+
+      <!-- NO RESULT -->
+      <div id="noResult" class="no-result">
+        <p><strong>That combination isn't standard.</strong></p>
+        <p>Some table size / series combinations weren't produced, or the machine may be a special build. Call us at <a href="tel:8474279360">+1-847-427-9360</a> with your serial number and we'll identify the correct parts.</p>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div class="how-it-works">
+        <h3>How the W&amp;B Clutch System Works</h3>
+        <p>The table clutch engages and disengages the main table drive. It consists of a pack of alternating <strong>steel discs</strong> and <strong>Ferodo (friction) discs</strong>, compressed by <strong>spring and plunger assemblies</strong>.</p>
+        <p>There are two clutch sizes — <strong>No.5</strong> (smaller, used on 36" and standard 48" tables) and <strong>No.6</strong> (larger, used on 48" high-speed, 60", and 72" tables). On N/EV/R series machines, all table sizes use the No.6 clutch.</p>
+        <p>Getting the wrong parts can cause clutch slipping, engagement problems, or damage. The steel disc type changed between series — <strong>thin</strong> (Early DH), <strong>thick/splined</strong> (Series II DH), and <strong>spur-drive</strong> (M/EM and later). They are not interchangeable.</p>
+        <p>The spring also changed: the <strong>old-type spring (8473-09)</strong> is used on DH series machines, while the <strong>new-type spring (8473-10)</strong> is used on M/EM and all later series. These are not interchangeable either.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Need Other Parts?</h2>
+    <p>Bearings, brake shoes, saddle nuts, shear pins, and more — we stock the most common W&amp;B parts and source everything else directly from Webster &amp; Bennett UK.</p>
+    <div class="cta-actions">
+      <a href="spares.html" class="btn btn-white btn-lg">View Parts Catalog</a>
+      <a href="contact.html" class="btn btn-outline-white btn-lg">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  renderNav('clutch-lookup.html');
+  renderFooter();
+
+  /* ── Clutch Plate Data ── */
+  const CLUTCH_DATA = {
+    // Early DH (5022–5232)
+    'early_dh|36':    { clutch: 'No.5', steel: '8211-112', steelDesc: 'No.5 thin steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: 'Early DH thin Taylor clutch plates. Confirm serial is in range 5022–5232.' },
+    'early_dh|48':    { clutch: 'No.5', steel: '8211-112', steelDesc: 'No.5 thin steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: 'Standard 48" Early DH — No.5 clutch.' },
+    'early_dh|48shs': { clutch: 'No.6', steel: '8211-116', steelDesc: 'No.6 thin steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: '48" S.H.S. (Special High Speed) uses the larger No.6 clutch on Early DH.' },
+    'early_dh|60':    { clutch: 'No.6', steel: '8211-116', steelDesc: 'No.6 thin steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: '60" Early DH — No.6 clutch with thin discs.' },
+
+    // Series II DH (5233–5441)
+    'series2_dh|36':  { clutch: 'No.5', steel: '8211-110', steelDesc: 'No.5 thick/splined steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: 'Series II DH — thicker splined discs, not interchangeable with Early DH thin discs.' },
+    'series2_dh|48':  { clutch: 'No.5', steel: '8211-110', steelDesc: 'No.5 thick/splined steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: 'Standard 48" Series II DH — No.5 clutch with splined discs.' },
+    'series2_dh|60':  { clutch: 'No.6', steel: '8211-114', steelDesc: 'No.6 thick/splined steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-09', springDesc: 'Old-type spring & plunger assembly', note: '60" Series II DH — No.6 clutch.' },
+
+    // M / EM (5442–6561)
+    'm_em|36':    { clutch: 'No.5', steel: '8211-111', steelDesc: 'No.5 spur-drive steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'M/EM series — spur-drive clutch. New-type spring (8473-10), not interchangeable with old-type.' },
+    'm_em|48':    { clutch: 'No.5', steel: '8211-111', steelDesc: 'No.5 spur-drive steel disc', ferodo: '8211-109', ferodoDesc: 'No.5 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'Standard 48" M/EM — No.5 spur-drive clutch.' },
+    'm_em|48high':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: '48" High M/EM — uses the larger No.6 clutch.' },
+    'm_em|60':    { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: '60" M/EM — No.6 spur-drive clutch.' },
+    'm_em|72':    { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: '72" M/EM — No.6 spur-drive clutch.' },
+
+    // N / EV / R (6562+) — all use No.6
+    'n_ev_r|36':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'n_ev_r|48':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'n_ev_r|48shs':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'n_ev_r|48high':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'n_ev_r|60':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'n_ev_r|72':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+  };
+
+  const SERIES_NAMES = {
+    'early_dh': 'Early DH (S/N 5022–5232)',
+    'series2_dh': 'Series II DH (S/N 5233–5441)',
+    'm_em': 'M / EM (S/N 5442–6561)',
+    'n_ev_r': 'N / EV / R (S/N 6562+)'
+  };
+
+  function lookupClutch() {
+    const series = document.getElementById('seriesSelect').value;
+    const table = document.getElementById('tableSelect').value;
+    const resultCard = document.getElementById('resultCard');
+    const noResult = document.getElementById('noResult');
+
+    resultCard.classList.remove('visible');
+    noResult.classList.remove('visible');
+
+    if (!series || !table) {
+      alert('Please select both a series and table size.');
+      return;
+    }
+
+    const key = series + '|' + table;
+    const data = CLUTCH_DATA[key];
+
+    if (!data) {
+      noResult.classList.add('visible');
+      noResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    document.getElementById('resultTitle').textContent = data.clutch + ' Clutch — Parts List';
+    document.getElementById('resultSubtitle').textContent = SERIES_NAMES[series] + ' · ' + document.getElementById('tableSelect').selectedOptions[0].text + ' table';
+
+    document.getElementById('resultBody').innerHTML = `
+      <tr><td>Steel Disc</td><td><span class="part-number">${data.steel}</span></td><td>${data.steelDesc}</td></tr>
+      <tr><td>Ferodo Disc</td><td><span class="part-number">${data.ferodo}</span></td><td>${data.ferodoDesc}</td></tr>
+      <tr><td>Spring &amp; Plunger</td><td><span class="part-number">${data.spring}</span></td><td>${data.springDesc}</td></tr>
+      <tr><td>Clutch Type</td><td><span class="clutch-type">${data.clutch}</span></td><td>${data.clutch === 'No.5' ? 'Smaller clutch (36" and standard 48")' : 'Larger clutch (48" high/SHS, 60", 72")'}</td></tr>
+    `;
+
+    document.getElementById('resultNote').textContent = data.note;
+
+    resultCard.classList.add('visible');
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Your Machine | Webster & Bennett USA</title>
+  <meta name="description" content="Register your Webster & Bennett machine with us for faster parts ordering, service coordination, and maintenance records. Free registration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- SEO: Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.websterbennett.com/register">
+  <meta property="og:title" content="Register Your Webster & Bennett Machine">
+  <meta property="og:description" content="Register your W&B machine for faster parts ordering, service coordination, and permanent maintenance records. Free.">
+  <meta property="og:image" content="https://www.websterbennett.com/assets/machine_1.jpg">
+  <meta property="og:site_name" content="Webster &amp; Bennett USA">
+  <!-- SEO: Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Register Your Webster & Bennett Machine">
+  <meta name="twitter:description" content="Register your W&B machine for faster parts ordering, service coordination, and permanent maintenance records. Free.">
+  <meta name="twitter:image" content="https://www.websterbennett.com/assets/machine_1.jpg">
+  <!-- SEO: Canonical -->
+  <link rel="canonical" href="https://www.websterbennett.com/register">
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <div class="page-header-bg" style="background-image:url('assets/machine_1.jpg');"></div>
+  <div class="container">
+    <span class="eyebrow">Machine Registry</span>
+    <h1>Register Your Machine</h1>
+    <p>Register your Webster &amp; Bennett machine with us for faster parts identification, service coordination, and a permanent maintenance history on file.</p>
+  </div>
+</div>
+
+<!-- ── WHY REGISTER ── -->
+<section class="section-sm" style="background:var(--navy);color:#fff;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div style="background:var(--orange);border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">📋</div>
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:var(--orange);margin-bottom:4px;">Free &amp; Takes 2 Minutes</div>
+        <p style="margin:0;font-size:1.05rem;font-weight:600;color:#fff;">We keep your machine details on file so every future inquiry is faster and more accurate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BENEFITS + FORM ── -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Left: benefits -->
+      <div>
+        <div class="contact-card" style="margin-bottom:20px;">
+          <h3 style="margin-bottom:22px;">Why Register?</h3>
+          <div class="contact-item">
+            <div class="contact-icon">⚡</div>
+            <div>
+              <div class="contact-label">Faster Parts Orders</div>
+              <div class="contact-value">Skip the Q&amp;A</div>
+              <div class="contact-sub">We already know your series, table size, and clutch type — so quotes come back faster.</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📦</div>
+            <div>
+              <div class="contact-label">Order History</div>
+              <div class="contact-value">Permanent Record</div>
+              <div class="contact-sub">We track every part ordered for your machine, making reorders and diagnostics simple.</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🔧</div>
+            <div>
+              <div class="contact-label">Service Coordination</div>
+              <div class="contact-value">Right Tech, First Time</div>
+              <div class="contact-sub">When you need a field technician, we already know your machine configuration.</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📄</div>
+            <div>
+              <div class="contact-label">Manual Access</div>
+              <div class="contact-value">Correct Documentation</div>
+              <div class="contact-sub">We can point you to the exact manual and parts list for your specific machine.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card" style="background:var(--navy);border-color:var(--navy);">
+          <h4 style="color:var(--white);margin-bottom:10px;">Where to find your serial number</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.75);">The serial number plate is on the <strong style="color:white;">end face of the cross slide</strong> — it is stamped or cast there. Format is typically <strong style="color:white;">NNNN-S</strong> (e.g. 5416-3). If missing, check the headstock nameplate.</p>
+        </div>
+      </div>
+
+      <!-- Right: registration form -->
+      <div class="form-section">
+        <h3 style="margin-bottom:6px;">Machine Registration</h3>
+        <p style="margin-bottom:24px;">Fill in what you know — we can help identify the rest once we have your serial number.</p>
+        <div id="registerSuccess" class="alert alert-success">✓ Machine registered! We'll confirm your details and add your machine to our records.</div>
+        <form id="registerForm" action="https://formspree.io/f/mjgenrew" method="POST">
+          <input type="hidden" name="_subject" value="New Machine Registration — Webster Bennett USA">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" name="first_name" required placeholder="First name">
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" name="last_name" required placeholder="Last name">
+            </div>
+            <div class="form-group full">
+              <label>Company / Organization</label>
+              <input type="text" name="company" placeholder="Company name">
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="email" required placeholder="Email address">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="Phone number">
+            </div>
+            <div class="form-group">
+              <label>Machine Serial Number *</label>
+              <input type="text" name="serial_number" required placeholder="e.g. 5416-3">
+            </div>
+            <div class="form-group">
+              <label>Table Size</label>
+              <select name="table_size">
+                <option value="">Select if known</option>
+                <option value="36">36"</option>
+                <option value="48">48"</option>
+                <option value="60">60"</option>
+                <option value="72">72"</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>Machine Location / Plant</label>
+              <input type="text" name="location" placeholder="City, State or plant name">
+            </div>
+            <div class="form-group full">
+              <label>Additional Notes or Service Inquiry</label>
+              <textarea name="notes" placeholder="Any known modifications, rebuild history, current issues, or questions..."></textarea>
+            </div>
+          </div>
+          <div class="form-submit" style="margin-top:20px;">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">Register My Machine</button>
+          </div>
+          <p class="form-note">Registration is free. Your information is used only for parts and service support.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Already registered? Need parts now?</h2>
+    <p>Call us or send a quote request — if your machine is on file, we can turn quotes around even faster.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-primary btn-lg">Request a Quote</a>
+      <a href="tel:8474279360" class="btn btn-outline-white btn-lg">📞 +1-847-427-9360</a>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  renderNav('register.html');
+  renderFooter();
+  initForm('registerForm', 'registerSuccess');
+</script>
+</body>
+</html>
