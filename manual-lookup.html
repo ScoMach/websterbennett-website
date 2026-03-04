@@ -232,10 +232,16 @@
   /* ── Manual Data by Series ── */
   const MANUAL_DATA = {
     pre_dh: {
-      seriesName: 'Pre-DH / D / DCM Series',
+      seriesName: 'Pre-DH / D Series',
       range: 'S/N up to ~5021',
       era: 'Pre-1960s',
       manuals: [
+        {
+          ref: '101/1',
+          title: 'Early D Series — Service Manual',
+          coverage: 'Covers early D series machines. Published Jun 1947.',
+          featured: true
+        },
         {
           ref: '100/1 DCM',
           title: 'Pre-DH & DCM Series — Parts Manual',
@@ -244,22 +250,19 @@
         }
       ],
       notes: [
-        'Pre-DH machines vary significantly between builds. Always provide the full serial number including the suffix when contacting us.',
-        'If your nameplate is marked "D" or "DCM", Manual Ref 100/1 DCM is the standard reference. Other variants may apply.',
-        'Contact us before ordering — we may have more specific documentation for your exact build configuration.'
+        'Pre-DH and D series machines vary significantly between builds — always provide the full serial number including the suffix when contacting us.',
+        'Multiple manual variants exist for this era. The correct reference depends on your exact build configuration.',
+        'Contact us before ordering parts — we can confirm the right documentation for your machine.'
       ],
       ctaLabel: 'Request Pre-DH Documentation',
-      ctaQuery: 'Pre-DH%20%2F%20DCM%20Series%20manual'
+      ctaQuery: 'Pre-DH%20%2F%20D%20Series%20manual'
     },
     early_dh: {
       seriesName: 'Early DH Series',
       range: 'S/N 5022–5232',
       era: 'Early 1960s',
-      manuals: [],
-      notes: [
-        'Early DH machines use thin Taylor clutch plates — not interchangeable with later series.',
-        'DH series documentation is handled directly by our team. Contact us with your full serial number including suffix and we\'ll confirm availability and the correct reference for your build.'
-      ],
+      manuals: [], // computed dynamically by getDhData()
+      notes: [],   // computed dynamically
       ctaLabel: 'Request Early DH Documentation',
       ctaQuery: 'Early%20DH%20series%20manual'
     },
@@ -267,11 +270,8 @@
       seriesName: 'Series II DH',
       range: 'S/N 5233–5441',
       era: 'Mid 1960s',
-      manuals: [],
-      notes: [
-        'Series II DH introduced splined / thicker clutch plates compared to Early DH — not interchangeable.',
-        'DH series documentation is handled directly by our team. Contact us with your full serial number including suffix and we\'ll confirm the correct documentation for your machine.'
-      ],
+      manuals: [], // computed dynamically by getDhData()
+      notes: [],   // computed dynamically
       ctaLabel: 'Request Series II DH Documentation',
       ctaQuery: 'Series%20II%20DH%20manual'
     },
@@ -279,8 +279,8 @@
       seriesName: 'M / EM Series',
       range: 'S/N 5442–6561',
       era: 'Late 1960s–1970s',
-      manuals: [], // computed dynamically by getMEmData(num)
-      notes: [],   // computed dynamically by getMEmData(num)
+      manuals: [], // computed dynamically by getMEmData()
+      notes: [],   // computed dynamically
       ctaLabel: 'Request M/EM Series Manuals',
       ctaQuery: 'M%20%2F%20EM%20series%20manual'
     },
@@ -289,34 +289,22 @@
       range: 'S/N 6562 and above',
       era: '1970s–1990s',
       manuals: [
-        {
-          ref: '101/EV',
-          title: 'EV Series — Service Manual',
-          coverage: 'Electronic variable-speed machines in the later production series.',
-          featured: false
-        },
-        {
-          ref: '101/R',
-          title: 'R Series Manual — 72" Table',
-          coverage: 'R series machines with 72" table configuration.',
-          featured: false
-        },
-        {
-          ref: '100/R 36',
-          title: 'R Series Manual — 36" Table',
-          coverage: 'R series machines with 36" table configuration.',
-          featured: false
-        },
-        {
-          ref: '100/EV',
-          title: 'EV Series — Parts Manual',
-          coverage: 'Parts reference for EV series machines.',
-          featured: false
-        }
+        // EV — Electronic Variable speed
+        { ref: '100/EV', title: 'EV Series — 36" Table', coverage: 'Electronic variable-speed machines with 36" table.', featured: false },
+        { ref: '101/EV', title: 'EV Series — 48" Table', coverage: 'Electronic variable-speed machines with 48" table.', featured: false },
+        { ref: '102/EV', title: 'EV Series — 72" Table', coverage: 'Electronic variable-speed machines with 72" table.', featured: false },
+        // R — Revised late variant
+        { ref: '100/R',  title: 'R Series — 36" Table', coverage: 'R series machines with 36" table.', featured: false },
+        { ref: '100/R',  title: 'R Series — 48" Table', coverage: 'R series machines with 48" table.', featured: false },
+        { ref: '101/R',  title: 'R Series — 72" Table', coverage: 'R series machines with 72" table.', featured: false },
+        // V — Mechanical variable speed
+        { ref: '100/V',  title: 'V Series — 36" Table', coverage: 'V series machines with 36" table.', featured: false },
+        { ref: '101/V',  title: 'V Series — 48" Table', coverage: 'V series machines with 48" table.', featured: false },
+        { ref: '102/V',  title: 'V Series — 60" Table', coverage: 'V series machines with 60" table.', featured: false }
       ],
       notes: [
-        'The correct manual depends on your specific variant (N, EV, or R) and table size.',
-        'Check your machine nameplate or control panel for the variant designation — it will read "EV", "R", or "N".',
+        'The correct manual depends on your variant (V, EV, or R) and table size — check the machine nameplate and speed plate on the control panel for both.',
+        'V = mechanical variable speed · EV = electronic variable speed · R = revised late production variant.',
         'N/EV/R series always uses the No.6 spur clutch regardless of table size.'
       ],
       ctaLabel: 'Contact Us to Confirm Your Manual',
@@ -332,58 +320,133 @@
     { at: 6562, range: [6557, 6567], msg: '⚠ S/N near a series boundary (M/EM / N-EV-R). Physical inspection or confirmation from W&B UK may be needed to determine your exact series.' }
   ];
 
-  /* ── M/EM sub-range: pick the correct primary manual by machine number ── */
+  /* ── DH sub-range: pick correct primary manual (101/5, 101/6, or 101/7) ── */
+  function getDhData(key, num) {
+    const m101_5 = {
+      ref: '101/5',
+      title: 'DH Series — from S/N 5022',
+      coverage: 'DH series from S/N 5022/1. Published May 1959.',
+      featured: false
+    };
+    const m101_6 = {
+      ref: '101/6',
+      title: 'DH / EH Series — from S/N 5102',
+      coverage: 'DH and EH series from S/N 5102/15. Published Oct 1960.',
+      featured: false
+    };
+    const m101_7 = {
+      ref: '101/7',
+      title: 'DH / EH Series — from S/N 5326',
+      coverage: 'DH and EH series from S/N 5326/1. Published Apr 1963.',
+      featured: false
+    };
+
+    if (key === 'early_dh') {
+      if (num <= 5101) {
+        m101_5.featured = true;
+        return {
+          manuals: [m101_5],
+          notes: [
+            'Manual Ref 101/5 is the primary reference for this build range (DH series from S/N 5022, published May 1959).',
+            'Early DH machines use thin Taylor clutch plates — not interchangeable with later series.',
+            'Contact us with your full serial number including suffix to confirm documentation availability.'
+          ]
+        };
+      } else {
+        m101_6.featured = true;
+        return {
+          manuals: [m101_6, m101_5],
+          notes: [
+            'Manual Ref 101/6 is the primary reference for this build range (DH/EH from S/N 5102, published Oct 1960).',
+            'Early DH machines use thin Taylor clutch plates — not interchangeable with later series.',
+            'Contact us with your full serial number including suffix to confirm documentation availability.'
+          ]
+        };
+      }
+    } else {
+      // series2_dh: 5233–5441
+      if (num <= 5325) {
+        m101_6.featured = true;
+        return {
+          manuals: [m101_6, m101_7],
+          notes: [
+            'Manual Ref 101/6 is the primary reference for this build range. Manual Ref 101/7 begins at S/N 5326.',
+            'Series II DH introduced splined / thicker clutch plates compared to Early DH — not interchangeable.',
+            'Contact us with your full serial number including suffix to confirm the correct documentation.'
+          ]
+        };
+      } else {
+        m101_7.featured = true;
+        return {
+          manuals: [m101_7, m101_6],
+          notes: [
+            'Manual Ref 101/7 is the primary reference for this build range (DH/EH from S/N 5326, published Apr 1963).',
+            'Series II DH introduced splined / thicker clutch plates compared to Early DH — not interchangeable.',
+            'Contact us with your full serial number including suffix to confirm documentation availability.'
+          ]
+        };
+      }
+    }
+  }
+
+  /* ── M/EM sub-range: pick correct primary manual by machine number ── */
   function getMEmData(num) {
+    const m101_7 = {
+      ref: '101/7',
+      title: 'DH / EH Series — from S/N 5326',
+      coverage: 'Last serial-range manual before the M series. Published Apr 1963. Covers DH/EH through early M build period.',
+      featured: false
+    };
     const m101_10 = {
       ref: '101/10',
       title: 'M / EM Series — Complete Service Manual',
-      coverage: 'M series pages 1–117 · EM series pages 118–148 · Covers 36", 48", and 60" table sizes.',
+      coverage: 'M series pages 1–117 · EM series pages 118–148 · 36", 48", and 60" table sizes. Published Jun 1970.',
       caveat: 'Does NOT cover 72" table configurations.',
       featured: false
     };
     const m101_8 = {
-      ref: '101/8 PP',
-      title: 'M Series Parts List — from S/N 5484',
-      coverage: 'Dedicated parts reference for the 5484–5758 build range.',
+      ref: '101/8',
+      title: 'M Series — from S/N 5484',
+      coverage: 'Key reference for the 5484–5758 build range. Published Jul 1965.',
       featured: false
     };
     const m101_9 = {
-      ref: '101/9 PP',
-      title: 'M Series Parts List — from S/N 5759',
-      coverage: 'Dedicated parts reference for machines from S/N 5759/1.',
+      ref: '101/9',
+      title: 'M Series — from S/N 5759',
+      coverage: 'Key reference for machines from S/N 5759/1. Published Jan 1968.',
       featured: false
     };
 
     if (num <= 5483) {
-      // Early M range — 101/10 is the only reference before 5484
-      m101_10.featured = true;
+      // 5442–5483: classified as M series by design, but 101/8 only starts at 5484
+      // 101/7 (DH/EH, from 5326/1) is the last serial-specific W&B manual covering this build period
+      m101_7.featured = true;
       return {
-        manuals: [m101_10],
+        manuals: [m101_7, m101_10],
         notes: [
-          'Manual Ref 101/10 is the primary reference for this build range (M and EM series).',
-          'M vs. EM: M = manual speed change, EM = electronic variable speed. EM section is pages 118–148.',
-          'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
+          'This machine is in the 5442–5483 build range. The last W&B serial-range manual covering this period is Ref 101/7 (DH/EH, from S/N 5326/1, Apr 1963).',
+          'Manual Ref 101/8 (M series) begins at S/N 5484 — this machine predates that documentation.',
+          '101/10 is the comprehensive M/EM service manual (Jun 1970) and may also be useful as a general reference.',
+          'Contact us with your full serial number — we can confirm the exact documentation for your build.'
         ]
       };
     } else if (num <= 5758) {
-      // 5484–5758: 101/8 PP is the key parts reference for this build range
       m101_8.featured = true;
       return {
         manuals: [m101_8, m101_10],
         notes: [
-          'Manual Ref 101/8 PP is the key parts reference for the 5484–5758 build range.',
-          '101/10 is the comprehensive service manual — also covers the EM variant (pages 118–148).',
+          'Manual Ref 101/8 is the key reference for the 5484–5758 build range (M series, published Jul 1965).',
+          '101/10 is the comprehensive M/EM service manual — also covers the EM variant (pages 118–148).',
           'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
         ]
       };
     } else {
-      // 5759–6561: 101/9 PP is the key parts reference
       m101_9.featured = true;
       return {
         manuals: [m101_9, m101_10],
         notes: [
-          'Manual Ref 101/9 PP is the key parts reference for machines from S/N 5759.',
-          '101/10 is the comprehensive service manual — also covers the EM variant (pages 118–148).',
+          'Manual Ref 101/9 is the key reference for machines from S/N 5759 (M series, published Jan 1968).',
+          '101/10 is the comprehensive M/EM service manual — also covers the EM variant (pages 118–148).',
           'If your machine has a 72" table, contact us — 101/10 does not cover 72" configurations.'
         ]
       };
@@ -428,10 +491,15 @@
     }
 
     const key = getSeriesKey(num);
-    // For M/EM: compute sub-range specific manuals + notes (clone to avoid mutating shared data)
-    const data = key === 'm_em'
-      ? Object.assign({}, MANUAL_DATA[key], getMEmData(num))
-      : MANUAL_DATA[key];
+    // For DH and M/EM: compute sub-range specific manuals + notes (clone to avoid mutating shared data)
+    let data;
+    if (key === 'm_em') {
+      data = Object.assign({}, MANUAL_DATA[key], getMEmData(num));
+    } else if (key === 'early_dh' || key === 'series2_dh') {
+      data = Object.assign({}, MANUAL_DATA[key], getDhData(key, num));
+    } else {
+      data = MANUAL_DATA[key];
+    }
 
     // Populate header
     document.getElementById('resultTitle').textContent = 'Series Identified: ' + data.seriesName;
