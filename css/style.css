@@ -434,6 +434,9 @@ p  { color: var(--gray-mid); line-height: 1.75; }
 .footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.6); transition: var(--transition); display: flex; align-items: center; gap: 6px; }
 .footer-col a::before { content: '→'; font-size: 0.7rem; color: var(--orange); }
 .footer-col a:hover { color: var(--white); }
+.footer-social::before { content: none !important; }
+.footer-social svg { opacity: 0.6; transition: var(--transition); }
+.footer-social:hover svg { opacity: 1; }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.08); padding: 22px 0;
   display: flex; justify-content: space-between; align-items: center;
