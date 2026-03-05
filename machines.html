@@ -9,22 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- SEO: Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.websterbennett.com/machines">
   <meta property="og:title" content="Machines for Sale | Webster & Bennett VTLs & CNC Turning Centers">
   <meta property="og:description" content="Webster & Bennett vertical boring mills and CNC vertical turning centers for sale. Contact us for pricing and availability.">
   <meta property="og:image" content="https://www.websterbennett.com/assets/machine_1.jpg">
   <meta property="og:site_name" content="Webster &amp; Bennett USA">
-  <!-- SEO: Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Machines for Sale | Webster & Bennett VTLs & CNC Turning Centers">
   <meta name="twitter:description" content="Webster & Bennett vertical boring mills and CNC vertical turning centers for sale.">
   <meta name="twitter:image" content="https://www.websterbennett.com/assets/machine_1.jpg">
-  <!-- SEO: Canonical -->
   <link rel="canonical" href="https://www.websterbennett.com/machines">
 
   <style>
+    /* ── Machine grid ── */
     .machine-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -40,16 +38,140 @@
       flex-direction: column;
       transition: box-shadow 0.2s;
     }
-    .machine-card:hover {
-      box-shadow: var(--shadow-lg);
+    .machine-card:hover { box-shadow: var(--shadow-lg); }
+
+    /* ── Gallery ── */
+    .machine-gallery { position: relative; background: #111; }
+    .machine-gallery-main {
+      display: block;
+      overflow: hidden;
+      cursor: zoom-in;
     }
     .machine-card-img {
       width: 100%;
-      height: 240px;
+      height: 260px;
       object-fit: cover;
       object-position: center;
-      background: #f0f0f0;
+      display: block;
+      transition: opacity 0.15s;
     }
+    .machine-thumbs {
+      display: flex;
+      gap: 3px;
+      padding: 3px;
+      background: #111;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #444 #111;
+    }
+    .machine-thumbs::-webkit-scrollbar { height: 4px; }
+    .machine-thumbs::-webkit-scrollbar-thumb { background: #555; border-radius: 2px; }
+    .machine-thumb {
+      flex-shrink: 0;
+      width: 60px;
+      height: 45px;
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.55;
+      border: 2px solid transparent;
+      transition: opacity 0.15s, border-color 0.15s;
+      border-radius: 2px;
+    }
+    .machine-thumb:hover { opacity: 0.9; }
+    .machine-thumb.active { opacity: 1; border-color: var(--orange); }
+    .photo-count {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    .lb-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 95vw;
+      max-height: 95vh;
+    }
+    #lb-img {
+      max-width: 82vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+      user-select: none;
+    }
+    .lb-arrow {
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      font-size: 2.2rem;
+      line-height: 1;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-arrow:hover { background: rgba(255,255,255,0.28); }
+    .lb-arrow:disabled { opacity: 0.2; cursor: default; }
+    #lb-close {
+      position: absolute;
+      top: -52px;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.15s;
+    }
+    #lb-close:hover { color: #fff; }
+    #lb-counter {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      font-family: monospace;
+    }
+    #lb-caption {
+      position: absolute;
+      bottom: -62px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    /* ── Card body ── */
     .machine-card-body {
       padding: 24px;
       flex: 1;
@@ -66,17 +188,16 @@
       margin-bottom: 8px;
     }
     .machine-card-title {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--navy);
       margin: 0 0 4px;
       line-height: 1.3;
     }
     .machine-serial {
-      font-size: 0.82rem;
-      color: #888;
+      font-size: 0.8rem;
+      color: #999;
       margin: 0 0 16px;
-      font-family: monospace;
     }
     .machine-specs {
       list-style: none;
@@ -92,15 +213,15 @@
       display: flex;
       gap: 8px;
     }
-    .machine-specs li:last-child {
-      border-bottom: none;
-    }
+    .machine-specs li:last-child { border-bottom: none; }
     .spec-label {
       font-weight: 600;
       color: var(--navy);
       min-width: 120px;
       flex-shrink: 0;
     }
+
+    /* ── Misc ── */
     .location-notice {
       background: #f0f4fa;
       border-left: 4px solid var(--orange);
@@ -110,21 +231,12 @@
       font-size: 0.9rem;
       color: #444;
     }
-    .location-notice strong {
-      color: var(--navy);
-    }
-    .section-divider {
-      border: none;
-      border-top: 2px solid #f0f0f0;
-      margin: 56px 0 0;
-    }
+    .location-notice strong { color: var(--navy); }
+    .section-divider { border: none; border-top: 2px solid #f0f0f0; margin: 56px 0 0; }
+
     @media (max-width: 600px) {
-      .machine-grid {
-        grid-template-columns: 1fr;
-      }
-      .machine-card-img {
-        height: 200px;
-      }
+      .machine-grid { grid-template-columns: 1fr; }
+      .machine-card-img { height: 220px; }
     }
   </style>
 </head>
@@ -141,14 +253,15 @@
   </div>
 </div>
 
-<!-- ── WEBSTER & BENNETT MACHINES ── -->
+<!-- ── INVENTORY ── -->
 <section class="section">
   <div class="container">
 
     <div class="location-notice">
-      <strong>Note:</strong> The machines listed on this page are located with <strong>Webster &amp; Bennett UK</strong> in Coventry, England. We coordinate all inquiries, pricing, and logistics on your behalf — one call gets the process started.
+      <strong>Note:</strong> The machines listed on this page are located with <strong>Webster &amp; Bennett UK</strong> in Oldbury, West Midlands, England. We coordinate all inquiries, pricing, and logistics on your behalf — one call gets the process started.
     </div>
 
+    <!-- W&B MACHINES -->
     <div class="section-header">
       <span class="eyebrow">Classic W&amp;B Iron</span>
       <h2>Webster &amp; Bennett Vertical Boring Mills</h2>
@@ -158,9 +271,28 @@
 
     <div class="machine-grid">
 
-      <!-- W&B 72" EV-NC -->
+      <!-- ── W&B 72" EV-NC ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5331-1.jpeg" alt="Webster &amp; Bennett 72&quot; EV-NC CNC Vertical Boring Mill S/N 7036-1" onerror="this.src='assets/machine_1.jpg'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-wb72" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5331-1.jpeg" alt="Webster &amp; Bennett 72&quot; EV-NC Vertical Boring Mill">
+          </div>
+          <span class="photo-count">12 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5331-1.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5331-1.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5334-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5334-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5333.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5333.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5332-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5332-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5338-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5338-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5337-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5337-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5336-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5336-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5347-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5347-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5346-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5346-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5343-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5343-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5341-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5341-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5340-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/IMG_5340-rotated.jpeg" data-target="main-wb72" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">Webster &amp; Bennett</div>
           <h3 class="machine-card-title">72&quot; EV-NC Vertical Boring Mill</h3>
@@ -181,9 +313,19 @@
         </div>
       </div>
 
-      <!-- W&B 48" E-M Series -->
+      <!-- ── W&B 48" E-M ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/b044ecbf-f497-4687-b816-ec2680681cae.jpg" alt="Webster &amp; Bennett 48&quot; E-M Series Vertical Boring Mill S/N 6174-3" onerror="this.src='assets/machine_2.jpg'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-wb48" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/b044ecbf-f497-4687-b816-ec2680681cae.jpg" alt="Webster &amp; Bennett 48&quot; E-M Series Vertical Boring Mill">
+          </div>
+          <span class="photo-count">3 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/b044ecbf-f497-4687-b816-ec2680681cae.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/b044ecbf-f497-4687-b816-ec2680681cae.jpg" data-target="main-wb48" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/4531e651-b952-4e82-a9c2-d52b65c5ff0c.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/4531e651-b952-4e82-a9c2-d52b65c5ff0c.jpg" data-target="main-wb48" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/1415d7de-b6c5-465b-a5fe-007157cc60a9.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2026/01/1415d7de-b6c5-465b-a5fe-007157cc60a9.jpg" data-target="main-wb48" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">Webster &amp; Bennett</div>
           <h3 class="machine-card-title">48&quot; E-M Series Vertical Boring Mill — Tall Body</h3>
@@ -203,11 +345,11 @@
         </div>
       </div>
 
-    </div><!-- /machine-grid -->
+    </div><!-- /machine-grid W&B -->
 
     <hr class="section-divider">
 
-    <!-- Other Makes -->
+    <!-- OTHER MAKES -->
     <div class="section-header" style="margin-top:48px;">
       <span class="eyebrow">Also Available</span>
       <h2>Other Makes &amp; Models</h2>
@@ -217,9 +359,34 @@
 
     <div class="machine-grid">
 
-      <!-- Doosan DBC 110-S -->
+      <!-- ── Doosan DBC 110-S ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5485-300x300.jpeg" alt="Doosan DBC 110-S CNC Horizontal Boring &amp; Milling Machine" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-dbc110" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5485.jpeg" alt="Doosan DBC 110-S CNC Horizontal Boring &amp; Milling">
+          </div>
+          <span class="photo-count">18 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5485.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5485.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5483.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5483.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image16.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image16.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image10-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image10-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5484-scaled.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_5484-scaled.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image3-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image3-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image17.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image17.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image18.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image18.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image5-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/image5-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4726-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4726-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4727-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4727-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4728-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4728-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4729-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4729-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4743-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4743-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4744-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4744-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4759-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4759-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4760.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4760.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4765-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2025/10/IMG_4765-rotated.jpeg" data-target="main-dbc110" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">Doosan</div>
           <h3 class="machine-card-title">DBC 110-S CNC Horizontal Boring &amp; Milling</h3>
@@ -237,9 +404,29 @@
         </div>
       </div>
 
-      <!-- Hankook VTC-160E -->
+      <!-- ── Hankook VTC-160E ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_4244-300x300.jpeg" alt="Hankook VTC-160E CNC Vertical Turning &amp; Milling Center" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-hankook" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_4244-rotated.jpeg" alt="Hankook VTC-160E CNC Vertical Turning &amp; Milling">
+          </div>
+          <span class="photo-count">13 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_4244-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_4244-rotated.jpeg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/RNFetchBlobTmp_y03vws2evb4c7p3x9b2q.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/RNFetchBlobTmp_y03vws2evb4c7p3x9b2q.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/RNFetchBlobTmp_e51te5fwivem4zllyoew.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/RNFetchBlobTmp_e51te5fwivem4zllyoew.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_1791-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_1791-rotated.jpeg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_1792-rotated.jpeg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/IMG_1792-rotated.jpeg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/1.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/1.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/2.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/2.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/4.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/4.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/6.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/6.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/8.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/8.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/9.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/9.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/10.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/10.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/13.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/08/13.jpg" data-target="main-hankook" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">Hankook</div>
           <h3 class="machine-card-title">VTC-160E CNC Vertical Turning &amp; Milling</h3>
@@ -260,9 +447,13 @@
         </div>
       </div>
 
-      <!-- You-Ji YV-1600-ATC+C -->
+      <!-- ── You-Ji YV-1600 ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/10/IMG_5715-300x300.jpeg" alt="You-Ji YV-1600-ATC+C CNC Vertical Turning &amp; Milling Center" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/10/IMG_5715-scaled.jpeg" alt="You-Ji YV-1600-ATC+C CNC Vertical Turning &amp; Milling">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">You-Ji</div>
           <h3 class="machine-card-title">YV-1600-ATC+C CNC Vertical Turning &amp; Milling</h3>
@@ -283,9 +474,29 @@
         </div>
       </div>
 
-      <!-- YouJi YV-250A pair -->
+      <!-- ── YouJi YV-250A pair ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8484-300x300.jpg" alt="YouJi YV-250A CNC Vertical Turning Centers — matched pair" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-yv250a" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8484.jpg" alt="YouJi YV-250A CNC Vertical Turning Centers — matched pair">
+          </div>
+          <span class="photo-count">13 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8484.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8484.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8485.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8485.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8487.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8487.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8488.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8488.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8489.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8489.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8490.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8490.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8491.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8491.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8492.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8492.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8494.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8494.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8495.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8495.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8496.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8496.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8497.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8497.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8498.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/08/IMG_8498.jpg" data-target="main-yv250a" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">YouJi &nbsp;·&nbsp; Matched Pair</div>
           <h3 class="machine-card-title">YV-250A CNC Vertical Turning Centers — Pair (2013/14)</h3>
@@ -306,9 +517,26 @@
         </div>
       </div>
 
-      <!-- Doosan Puma VAW 800 -->
+      <!-- ── Doosan Puma VAW 800 ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-50-49-300x300.jpg" alt="Doosan Puma VAW 800 CNC Vertical Turning Center" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-vaw800" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-50-49-scaled.jpg" alt="Doosan Puma VAW 800 CNC Vertical Turning">
+          </div>
+          <span class="photo-count">10 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-50-49-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-50-49-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-17-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-17-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-31-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-31-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-41-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-41-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-45-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-45-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-58-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-51-58-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-52-08-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-52-08-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-52-25-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-52-25-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-53-03-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-53-03-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-53-22-scaled.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2024/04/Photo-01-03-2024-10-53-22-scaled.jpg" data-target="main-vaw800" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">Doosan</div>
           <h3 class="machine-card-title">Puma VAW 800 CNC Vertical Turning (2016)</h3>
@@ -326,9 +554,23 @@
         </div>
       </div>
 
-      <!-- ROBBI Omicron 3620 -->
+      <!-- ── ROBBI Omicron 3620 ── -->
       <div class="machine-card">
-        <img class="machine-card-img" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/3.jpg" alt="ROBBI Omicron 3620 Universal CNC Cylindrical Grinder" onerror="this.style.display='none'">
+        <div class="machine-gallery">
+          <div class="machine-gallery-main" onclick="openLightbox(this)">
+            <img class="machine-card-img" id="main-robbi" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/3.jpg" alt="ROBBI Omicron 3620 Universal CNC Cylindrical Grinder">
+          </div>
+          <span class="photo-count">7 photos</span>
+          <div class="machine-thumbs">
+            <img class="machine-thumb active" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/3.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/3.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/1.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/1.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/4.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/4.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/5.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/5.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/6-1.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/6-1.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/IMG_3880.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/IMG_3880.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+            <img class="machine-thumb" src="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/IMG_3884.jpg" data-full="https://www.webster-bennett.co.uk/wp-content/uploads/2023/09/IMG_3884.jpg" data-target="main-robbi" onclick="swapMain(this)" loading="lazy" alt="">
+          </div>
+        </div>
         <div class="machine-card-body">
           <div class="machine-badge">ROBBI</div>
           <h3 class="machine-card-title">Omicron 3620 Universal CNC Cylindrical Grinder</h3>
@@ -347,10 +589,10 @@
         </div>
       </div>
 
-    </div><!-- /machine-grid -->
+    </div><!-- /machine-grid other -->
 
     <div style="text-align:center;margin-top:48px;padding:32px;background:#f7f8fa;border-radius:var(--radius-lg);">
-      <p style="margin-bottom:6px;font-size:0.95rem;color:#555;">All machines listed are located with <strong>Webster &amp; Bennett UK</strong> in Coventry, England.</p>
+      <p style="margin-bottom:6px;font-size:0.95rem;color:#555;">All machines listed are located with <strong>Webster &amp; Bennett UK</strong> in Oldbury, West Midlands, England.</p>
       <p style="margin-bottom:24px;font-size:0.95rem;color:#555;">We coordinate pricing, logistics, and shipping to the Americas on your behalf.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
         <a href="contact.html?subject=machine" class="btn btn-primary btn-lg">Inquire About Any Machine</a>
@@ -393,10 +635,93 @@
 
 <div id="site-footer"></div>
 
+<!-- ── Lightbox ── -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button id="lb-close" onclick="closeLightbox()" title="Close (Esc)">✕</button>
+    <button class="lb-arrow" id="lb-prev" onclick="lightboxPrev()" title="Previous (←)">&#8249;</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-arrow" id="lb-next" onclick="lightboxNext()" title="Next (→)">&#8250;</button>
+    <div id="lb-counter"></div>
+  </div>
+</div>
+
 <script src="js/components.js"></script>
 <script>
   renderNav('machines.html');
   renderFooter();
+
+  // ── Thumbnail swap (updates main card image) ──
+  function swapMain(thumb) {
+    const targetId = thumb.dataset.target;
+    const mainImg = document.getElementById(targetId);
+    mainImg.src = thumb.dataset.full;
+    thumb.closest('.machine-thumbs').querySelectorAll('.machine-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+
+  // ── Lightbox ──
+  var lbImages = [];
+  var lbIndex  = 0;
+
+  function openLightbox(mainDiv) {
+    var gallery = mainDiv.closest('.machine-gallery');
+    var thumbs  = gallery.querySelectorAll('.machine-thumb');
+
+    if (thumbs.length > 0) {
+      lbImages = Array.from(thumbs).map(function(t){ return t.dataset.full; });
+      lbIndex  = Array.from(thumbs).findIndex(function(t){ return t.classList.contains('active'); });
+      if (lbIndex < 0) lbIndex = 0;
+    } else {
+      // Single image — no thumbnail strip
+      var img  = mainDiv.querySelector('.machine-card-img');
+      lbImages = [img.src];
+      lbIndex  = 0;
+    }
+
+    lbShow();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function lbShow() {
+    document.getElementById('lb-img').src = lbImages[lbIndex];
+    document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    document.getElementById('lb-prev').disabled = (lbIndex === 0);
+    document.getElementById('lb-next').disabled = (lbIndex === lbImages.length - 1);
+  }
+
+  function lightboxNext() {
+    if (lbIndex < lbImages.length - 1) { lbIndex++; lbShow(); }
+  }
+
+  function lightboxPrev() {
+    if (lbIndex > 0) { lbIndex--; lbShow(); }
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.getElementById('lb-img').src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowRight') lightboxNext();
+    else if (e.key === 'ArrowLeft') lightboxPrev();
+    else if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Touch swipe
+  var lbTouchX = 0;
+  document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+    lbTouchX = e.touches[0].clientX;
+  }, {passive: true});
+  document.getElementById('lightbox').addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - lbTouchX;
+    if (Math.abs(dx) > 50) { if (dx < 0) lightboxNext(); else lightboxPrev(); }
+  });
 </script>
 </body>
 </html>
