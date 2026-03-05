@@ -17,11 +17,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.websterbennett.com/manuals</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.websterbennett.com/machines</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -55,11 +50,6 @@
   <!-- Guides & Troubleshooting -->
   <url>
     <loc>https://www.websterbennett.com/guides/identify-your-series</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.websterbennett.com/guides/identifying-your-machine</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

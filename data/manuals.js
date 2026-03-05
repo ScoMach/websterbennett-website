@@ -14,7 +14,7 @@ const MANUALS = [
     title: "Webster & Bennett 36\" Vertical Turret Lathe — Complete Service Manual",
     description: "Full maintenance, parts identification, and service manual for the W&B 36\" VTL. Covers spindle assembly, hydraulic system, electrical diagrams, and recommended maintenance schedules.",
     pages: null,          // Add approximate page count
-    gumroadUrl: "#",      // Replace with your Gumroad product URL
+    gumroadUrl: "contact.html?subject=manual-36-vtl",
     price: 250,
     available: true
   },
@@ -24,7 +24,7 @@ const MANUALS = [
     title: "Webster & Bennett 48\" DH Series — Service & Parts Manual",
     description: "Comprehensive service manual for the 48\" DH model including parts diagrams, cross-sectional drawings, lubrication guide, and electrical schematics.",
     pages: null,
-    gumroadUrl: "#",
+    gumroadUrl: "contact.html?subject=manual-48-dh",
     price: 250,
     available: true
   },
@@ -34,7 +34,7 @@ const MANUALS = [
     title: "Webster & Bennett 60\" Vertical Boring Mill — Operations & Maintenance Manual",
     description: "Operations, maintenance, and parts reference manual for the 60\" vertical boring mill. Includes setup procedures, tooling guidance, and full parts breakdown.",
     pages: null,
-    gumroadUrl: "#",
+    gumroadUrl: "contact.html?subject=manual-60-vtl",
     price: 250,
     available: true
   },
@@ -44,7 +44,7 @@ const MANUALS = [
     title: "Webster & Bennett 72\" EM Series — Complete Manual",
     description: "Full technical manual for the 72\" EM series vertical turret lathe. Parts lists, assembly drawings, hydraulic circuit diagrams, and electrical schematics.",
     pages: null,
-    gumroadUrl: "#",
+    gumroadUrl: "contact.html?subject=manual-72-em",
     price: 250,
     available: true
   }

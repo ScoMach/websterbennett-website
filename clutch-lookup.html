@@ -58,7 +58,7 @@
 
 <div class="page-header">
   <div class="container">
-    <span class="eyebrow">Parts Lookup Tool</span>
+    <span class="eyebrow">Parts Lookup Tool — Beta</span>
     <h1>Clutch Plate Lookup</h1>
     <p>Select your series and table size to find the correct clutch plate part numbers for your Webster &amp; Bennett machine.</p>
   </div>
@@ -67,6 +67,11 @@
 <section class="section">
   <div class="container">
     <div class="lookup-container">
+
+      <!-- BETA DISCLAIMER -->
+      <div style="background:#FFF3CD;border:1.5px solid #D4A017;border-radius:8px;padding:16px 20px;margin-bottom:24px;font-size:0.88rem;color:#664D03;line-height:1.6;">
+        <strong>Beta Tool</strong> — This lookup covers standard production configurations, but some Webster &amp; Bennett machines have non-standard clutch assemblies due to factory variations, rebuilds, or retrofits over the decades. Always confirm results with us before ordering — we'll verify the exact specification for your machine at no charge. Call <a href="tel:8474279360" style="color:#664D03;font-weight:600;">+1-847-427-9360</a> or <a href="mailto:websterbennett@scofieldmachine.com" style="color:#664D03;font-weight:600;">email us</a>.
+      </div>
 
       <!-- LOOKUP FORM -->
       <div class="lookup-form">
@@ -78,7 +83,7 @@
               <option value="early_dh">Early DH (S/N 5022–5232)</option>
               <option value="series2_dh">Series II DH (S/N 5233–5441)</option>
               <option value="m_em">M / EM (S/N 5442–6561)</option>
-              <option value="n_ev_r">N / EV / R (S/N 6562+)</option>
+              <option value="v_ev_r">V / EV / R (S/N 6562+)</option>
             </select>
           </div>
           <div class="form-group">
@@ -141,7 +146,7 @@
       <div class="how-it-works">
         <h3>How the W&amp;B Clutch System Works</h3>
         <p>The table clutch engages and disengages the main table drive. It consists of a pack of alternating <strong>steel discs</strong> and <strong>Ferodo (friction) discs</strong>, compressed by <strong>spring and plunger assemblies</strong>.</p>
-        <p>There are two clutch sizes — <strong>No.5</strong> (smaller, used on 36" and standard 48" tables) and <strong>No.6</strong> (larger, used on 48" high-speed, 60", and 72" tables). On N/EV/R series machines, all table sizes use the No.6 clutch.</p>
+        <p>There are two clutch sizes — <strong>No.5</strong> (smaller, used on 36" and standard 48" tables) and <strong>No.6</strong> (larger, used on 48" high-speed, 60", and 72" tables). On V/EV/R series machines, all table sizes use the No.6 clutch.</p>
         <p>Getting the wrong parts can cause clutch slipping, engagement problems, or damage. The steel disc type changed between series — <strong>thin</strong> (Early DH), <strong>thick/splined</strong> (Series II DH), and <strong>spur-drive</strong> (M/EM and later). They are not interchangeable.</p>
         <p>The spring also changed: the <strong>old-type spring (8473-09)</strong> is used on DH series machines, while the <strong>new-type spring (8473-10)</strong> is used on M/EM and all later series. These are not interchangeable either.</p>
       </div>
@@ -189,20 +194,20 @@
     'm_em|60':    { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: '60" M/EM — No.6 spur-drive clutch.' },
     'm_em|72':    { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: '72" M/EM — No.6 spur-drive clutch.' },
 
-    // N / EV / R (6562+) — all use No.6
-    'n_ev_r|36':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
-    'n_ev_r|48':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
-    'n_ev_r|48shs':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
-    'n_ev_r|48high':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
-    'n_ev_r|60':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
-    'n_ev_r|72':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'N/EV/R series — all table sizes use the No.6 spur clutch.' },
+    // V / EV / R (6562+) — all use No.6
+    'v_ev_r|36':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'v_ev_r|48':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'v_ev_r|48shs':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'v_ev_r|48high':{ clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'v_ev_r|60':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
+    'v_ev_r|72':  { clutch: 'No.6', steel: '8211-115', steelDesc: 'No.6 spur-drive steel disc', ferodo: '8211-113', ferodoDesc: 'No.6 Ferodo disc', spring: '8473-10', springDesc: 'New-type spring & plunger assembly', note: 'V/EV/R series — all table sizes use the No.6 spur clutch.' },
   };
 
   const SERIES_NAMES = {
     'early_dh': 'Early DH (S/N 5022–5232)',
     'series2_dh': 'Series II DH (S/N 5233–5441)',
     'm_em': 'M / EM (S/N 5442–6561)',
-    'n_ev_r': 'N / EV / R (S/N 6562+)'
+    'v_ev_r': 'V / EV / R (S/N 6562+)'
   };
 
   function lookupClutch() {

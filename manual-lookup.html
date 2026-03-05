@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webster & Bennett Manual Lookup | Find the Right Service Manual</title>
-  <meta name="description" content="Enter your Webster & Bennett serial number to find the correct service manual for your machine. Covers all W&B VTL series from Pre-DH through N/EV/R.">
+  <meta name="description" content="Enter your Webster & Bennett serial number to find the correct service manual for your machine. Covers all W&B VTL series from Pre-DH through V/EV/R.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -122,7 +122,7 @@
           <button class="btn btn-primary btn-lg" onclick="lookupManual()">Find My Manual</button>
         </div>
         <p style="font-size:0.78rem;color:var(--gray-mid);margin-top:12px;">
-          Enter the number from your machine's serial plate — just the machine number is fine (e.g. 5834). It's stamped on the end face of the cross slide.
+          Enter the number from your machine's serial plate — just the machine number is fine (e.g. 5834). It's on the left-hand side of the cross rail.
           Don't know your serial? <a href="guides/identify-your-series.html">Read our identification guide</a>.
         </p>
       </div>
@@ -181,7 +181,7 @@
 
         <p>The machine number (left of the dash) places your machine in a series. Use that series to find the right manual. The suffix is important when ordering parts — always include it.</p>
 
-        <p><strong>Where to find it:</strong> The serial number is stamped or cast on the <strong>end face of the cross slide</strong>. A secondary location is the headstock nameplate, though this can be missing or re-stamped after a rebuild.</p>
+        <p><strong>Where to find it:</strong> The serial number plate is on the <strong>left-hand side of the cross rail</strong>, recessed above the lower way surface. If the stamp is worn down, try removing the center cap on the turret — it may also be stamped underneath. Some machines also have it on a plate or plaque attached to the machine.</p>
 
         <h3 style="margin-top:32px;">Series Reference</h3>
         <table class="series-range-table">
@@ -194,11 +194,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Up to ~5021</td><td><strong>Pre-DH / D / DCM</strong></td><td>Pre-1960s</td><td>Older design; significant variation</td></tr>
-            <tr><td>5022 – 5232</td><td><strong>Early DH</strong></td><td>~Early 1960s</td><td>Thin Taylor clutch plates; old-type spring</td></tr>
+            <tr><td>Up to ~5021</td><td><strong>Pre-DH / D</strong></td><td>Pre-1960s</td><td>Older design; significant variation</td></tr>
+            <tr><td>5022 – 5232</td><td><strong>Early DH</strong></td><td>~Late 1950s–Early 1960s</td><td>Thin Taylor clutch plates; old-type spring</td></tr>
             <tr><td>5233 – 5441</td><td><strong>Series II DH</strong></td><td>~Mid 1960s</td><td>Splined/thicker clutch plates</td></tr>
-            <tr><td>5442 – 6561</td><td><strong>M / EM</strong></td><td>~Late 1960s–70s</td><td>Spur-drive clutch; new-type spring</td></tr>
-            <tr><td>6562 and above</td><td><strong>N / EV / R</strong></td><td>~1970s–1990s</td><td>Final production; always No.6 clutch</td></tr>
+            <tr><td>5442 – 6561</td><td><strong>M / EM</strong></td><td>~Mid 1960s–1970s</td><td>Spur-drive clutch; new-type spring</td></tr>
+            <tr><td>6562 and above</td><td><strong>V / EV / R</strong></td><td>~1970s–1990s</td><td>Final production; always No.6 clutch</td></tr>
           </tbody>
         </table>
         <p style="font-size:0.82rem;color:var(--gray-mid);">
@@ -243,9 +243,9 @@
           featured: true
         },
         {
-          ref: '100/1 DCM',
-          title: 'Pre-DH & DCM Series — Parts Manual',
-          coverage: 'Parts lists and assembly references for DCM and pre-DH series machines.',
+          ref: '100/1',
+          title: 'Pre-DH & D Series — Parts Manual',
+          coverage: 'Parts lists and assembly references for pre-DH and D series machines.',
           featured: false
         }
       ],
@@ -260,7 +260,7 @@
     early_dh: {
       seriesName: 'Early DH Series',
       range: 'S/N 5022–5232',
-      era: 'Early 1960s',
+      era: 'Late 1950s–Early 1960s',
       manuals: [], // computed dynamically by getDhData()
       notes: [],   // computed dynamically
       ctaLabel: 'Request Early DH Documentation',
@@ -278,14 +278,14 @@
     m_em: {
       seriesName: 'M / EM Series',
       range: 'S/N 5442–6561',
-      era: 'Late 1960s–1970s',
+      era: 'Mid 1960s–1970s',
       manuals: [], // computed dynamically by getMEmData()
       notes: [],   // computed dynamically
       ctaLabel: 'Request M/EM Series Manuals',
       ctaQuery: 'M%20%2F%20EM%20series%20manual'
     },
     n_ev_r: {
-      seriesName: 'N / EV / R Series',
+      seriesName: 'V / EV / R Series',
       range: 'S/N 6562 and above',
       era: '1970s–1990s',
       manuals: [
@@ -305,7 +305,7 @@
       notes: [
         'The correct manual depends on your variant (V, EV, or R) and table size — check the machine nameplate and speed plate on the control panel for both.',
         'V = mechanical variable speed · EV = electronic variable speed · R = revised late production variant.',
-        'N/EV/R series always uses the No.6 spur clutch regardless of table size.'
+        'V/EV/R series always uses the No.6 spur clutch regardless of table size.'
       ],
       ctaLabel: 'Contact Us to Confirm Your Manual',
       ctaQuery: 'N%20%2F%20EV%20%2F%20R%20series%20manual'

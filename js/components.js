@@ -2,6 +2,25 @@
    Shared components: nav, footer, and utilities
    ============================================================ */
 
+/* ── Path helper ──
+   Pages in subdirectories (guides/, parts/) need "../" prefix
+   to reach root-level pages. This detects the depth automatically. */
+function getBase() {
+  const path = window.location.pathname;
+  const depth = (path.match(/\//g) || []).length - 1;
+  // For file:// protocol or single-level paths, check if we're in a subdir
+  if (path.includes('/guides/') || path.includes('/parts/')) return '../';
+  return '';
+}
+
+function fixLinks(html) {
+  const base = getBase();
+  if (!base) return html;
+  // Prefix relative hrefs and srcs (skip absolute, mailto, tel, #, javascript)
+  return html.replace(/(href|src)="(?!https?:|mailto:|tel:|#|javascript:|\/\/)([^"]+)"/g,
+    (match, attr, url) => `${attr}="${base}${url}"`);
+}
+
 const NAV_HTML = `
 <div class="top-bar">
   <div class="container">
@@ -71,6 +90,7 @@ const FOOTER_HTML = `
           <h4>Resources &amp; Guides</h4>
           <ul>
             <li><a href="clutch-lookup.html">Clutch Plate Lookup</a></li>
+            <li><a href="guides/identify-your-series.html">Machine &amp; Series Identification Guide</a></li>
             <li><a href="faq.html">Parts FAQ</a></li>
           </ul>
         </div>
@@ -80,6 +100,7 @@ const FOOTER_HTML = `
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="mailto:websterbennett@scofieldmachine.com">Email Us</a></li>
+            <li><a href="https://www.linkedin.com/company/scofield-machine-sales-service-inc" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </div>
       </div>
@@ -87,7 +108,7 @@ const FOOTER_HTML = `
   </div>
   <div class="container">
     <div class="footer-bottom">
-      <p>©2026 Webster &amp; Bennett USA | Operated by Scofield Machine Sales &amp; Service, Inc. | All rights reserved.</p>
+      <p>&copy;2026 Webster &amp; Bennett USA | Operated by Scofield Machine Sales &amp; Service, Inc. | All rights reserved.</p>
       <p>Exclusive authorized Webster &amp; Bennett parts distributor for the Americas</p>
     </div>
   </div>
@@ -96,17 +117,20 @@ const FOOTER_HTML = `
 function renderNav(activePage) {
   const el = document.getElementById('site-nav');
   if (el) {
-    el.innerHTML = NAV_HTML;
+    el.innerHTML = fixLinks(NAV_HTML);
     const links = el.querySelectorAll('.nav-links a');
     links.forEach(l => {
-      if (l.getAttribute('href') === activePage) l.classList.add('active');
+      const href = l.getAttribute('href');
+      if (href && (href === activePage || href.endsWith('/' + activePage) || href.endsWith(activePage))) {
+        l.classList.add('active');
+      }
     });
   }
 }
 
 function renderFooter() {
   const el = document.getElementById('site-footer');
-  if (el) el.innerHTML = FOOTER_HTML;
+  if (el) el.innerHTML = fixLinks(FOOTER_HTML);
 }
 
 function toggleNav() {
@@ -138,7 +162,7 @@ function initForm(formId, successId) {
     e.preventDefault();
     const btn = form.querySelector('[type=submit]');
     const origText = btn.textContent;
-    btn.textContent = 'Sending…'; btn.disabled = true;
+    btn.textContent = 'Sending\u2026'; btn.disabled = true;
     try {
       const res = await fetch(form.action, {
         method: 'POST', body: new FormData(form),
@@ -148,23 +172,22 @@ function initForm(formId, successId) {
         form.reset();
         const success = document.getElementById(successId);
         if (success) { success.style.display = 'block'; }
-        btn.textContent = 'Sent ✓';
+        btn.textContent = 'Sent \u2713';
       } else {
-        btn.textContent = 'Error — please try again';
+        btn.textContent = 'Error \u2014 please try again';
         setTimeout(() => { btn.textContent = origText; btn.disabled = false; }, 3000);
       }
     } catch {
-      btn.textContent = 'Error — call us directly';
+      btn.textContent = 'Error \u2014 call us directly';
       setTimeout(() => { btn.textContent = origText; btn.disabled = false; }, 3000);
     }
   });
 }
 
 /* ── Google Analytics ── */
-/* Replace GA_MEASUREMENT_ID with your Google Analytics 4 measurement ID (e.g. G-XXXXXXXXXX) */
 (function() {
   const GA_ID = 'G-XH682HYYG2';
-  if (GA_ID === 'GA_MEASUREMENT_ID') return; // Skip if placeholder not replaced
+  if (GA_ID === 'GA_MEASUREMENT_ID') return;
   const s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
