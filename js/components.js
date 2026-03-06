@@ -45,6 +45,7 @@ const NAV_HTML = `
     <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="spares.html">Spares</a>
+      <a href="clutch-lookup.html">Clutch Lookup</a>
       <a href="services.html">Service</a>
 
       <a href="machines.html">Machines</a>
