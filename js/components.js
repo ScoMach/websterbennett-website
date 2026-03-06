@@ -90,6 +90,7 @@ const FOOTER_HTML = `
           <h4>Resources &amp; Guides</h4>
           <ul>
             <li><a href="clutch-lookup.html">Clutch Plate Lookup</a></li>
+            <li><a href="manual-lookup.html">Manual Lookup by Serial</a></li>
             <li><a href="guides/identify-your-series.html">Machine &amp; Series Identification Guide</a></li>
             <li><a href="faq.html">Parts FAQ</a></li>
           </ul>
