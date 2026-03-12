@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | Webster & Bennett USA</title>
-  <meta name="description" content="The page you're looking for doesn't exist. Find genuine Webster & Bennett spare parts, clutch lookup tools, and machine services.">
+  <title>Page Not Found | Webster &amp; Bennett USA</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Browse genuine Webster &amp; Bennett spare parts or contact us at 847-427-9360.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -14,26 +14,61 @@
 
 <div id="site-nav"></div>
 
-<section style="padding: 6rem 2rem; text-align: center; min-height: 60vh; display: flex; align-items: center; justify-content: center;">
-  <div style="max-width: 600px;">
-    <h1 style="font-size: 3rem; color: var(--wb-navy, #1a2744); margin-bottom: 1rem;">Page Not Found</h1>
-    <p style="font-size: 1.15rem; color: #555; margin-bottom: 2rem;">
-      Sorry, that page doesn't exist or may have moved. Try one of the links below to find what you need.
-    </p>
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-      <a href="/" class="btn btn-primary">Home</a>
-      <a href="spares.html" class="btn btn-outline">Spare Parts</a>
-      <a href="clutch-lookup.html" class="btn btn-outline">Clutch Lookup</a>
-      <a href="contact.html" class="btn btn-outline">Contact Us</a>
-    </div>
-    <p style="margin-top: 2rem; color: #888; font-size: 0.9rem;">
-      Need help? Call us at <a href="tel:+18474279360" style="color: var(--wb-navy, #1a2744); font-weight: 600;">847-427-9360</a>
-    </p>
+<section class="page-header">
+  <div class="container">
+    <span class="eyebrow">Error 404</span>
+    <h1>Page Not Found</h1>
+    <p>The page you're looking for doesn't exist or has been moved.</p>
   </div>
 </section>
 
-<div id="site-footer"></div>
-<script src="js/components.js"></script>
+<section class="section">
+  <div class="container" style="max-width:720px;text-align:center;">
+    <h2 style="margin-bottom:16px;">Let's Get You Back on Track</h2>
+    <div class="orange-rule" style="margin:0 auto 28px;"></div>
+    <p style="margin-bottom:36px;">If you were looking for a specific part or page, try one of the links below — or give us a call and we'll help you find exactly what you need.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:48px;">
+      <a href="spares.html" class="btn btn-primary">Browse Spare Parts</a>
+      <a href="contact.html" class="btn btn-outline">Contact Us</a>
+      <a href="tel:8474279360" class="btn btn-outline">Call 847-427-9360</a>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;text-align:left;">
+      <div style="background:var(--gray-lt);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <h3 style="font-size:0.95rem;margin-bottom:8px;">Spare Parts</h3>
+        <p style="font-size:0.84rem;">Clutch plates, brake parts, saddle nuts, shear pins, and more.</p>
+        <a href="spares.html" style="font-size:0.84rem;font-weight:700;">View Parts &rarr;</a>
+      </div>
+      <div style="background:var(--gray-lt);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <h3 style="font-size:0.95rem;margin-bottom:8px;">Clutch Lookup</h3>
+        <p style="font-size:0.84rem;">Find the exact clutch plates for your machine series and table size.</p>
+        <a href="clutch-lookup.html" style="font-size:0.84rem;font-weight:700;">Lookup Tool &rarr;</a>
+      </div>
+      <div style="background:var(--gray-lt);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
+        <h3 style="font-size:0.95rem;margin-bottom:8px;">Register Your Machine</h3>
+        <p style="font-size:0.84rem;">Get faster service and the right parts first time.</p>
+        <a href="register.html" style="font-size:0.84rem;font-weight:700;">Register &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
 
+<div class="cta-banner">
+  <div class="container">
+    <h2>Need Help? Call Us Directly.</h2>
+    <p>We're available by phone to help you find the right part for your Webster &amp; Bennett machine.</p>
+    <div class="cta-actions">
+      <a href="tel:8474279360" class="btn btn-primary btn-lg">Call 847-427-9360</a>
+      <a href="mailto:websterbennett@scofieldmachine.com" class="btn btn-outline-white btn-lg">Email Us</a>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  renderNav('');
+  renderFooter();
+</script>
 </body>
 </html>
